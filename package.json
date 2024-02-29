@@ -3,15 +3,15 @@
   "private": true,
   "license": "MIT",
   "version": "0.0.1",
-  "description": "Farcaster Kit's website and docs",
+  "description": "FarHack's website and docs",
   "author": "@dylsteck",
-  "homepage": "https://github.com/dylsteck/farcasterkit-docs#readme",
+  "homepage": "https://github.com/dylsteck/farhack#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dylsteck/farcasterkit-docs.git"
+    "url": "git+https://github.com/dylsteck/farhack.git"
   },
   "bugs": {
-    "url": "https://github.com/dylsteck/farcasterkit-docs/issues"
+    "url": "https://github.com/dylsteck/farhack/issues"
   },
   "scripts": {
     "dev": "next dev",
@@ -33,7 +33,6 @@
     "@vercel/analytics": "1.0.2",
     "classnames": "2.3.2",
     "clsx": "2.0.0",
-    "farcasterkit": "1.0.1",
     "framer-motion": "10.16.2",
     "next": "13.4.19",
     "nextra": "2.12.3",

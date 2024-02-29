@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useConfig } from 'nextra-theme-docs';
 
-import { tvs, Logo, NextUILogo } from '@components';
+import { tvs } from '@components';
 import FarcasterKitLogo from '@components/logo/farcasterkit-logo';
 
 import pkg from './package.json';

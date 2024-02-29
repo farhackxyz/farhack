@@ -1,8 +1,8 @@
-# Farcaster Kit's Website and Docs
+# FarHack's Website and Docs
 
 ## Getting Started
 
-Visit [farcasterkit.com](https://farcasterkit.com) to learn about Farcaster Kit and get started building today
+Visit [farhack.com](https://farhack.com) to learn more about FarHack, which is happening at FarCon from May 10 - 12, 2024 in Venice Beach.
 
 ## About the site
 

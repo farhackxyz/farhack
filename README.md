@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Visit [farhack.com](https://farhack.com) to learn more about FarHack, which is happening at FarCon from May 10 - 12, 2024 in Venice Beach.
+Visit [farhack.com](https://farhack.xyz) to learn more about FarHack, which is happening at FarCon from May 10 - 12, 2024 in Venice Beach.
 
 ## About the site
 
@@ -15,4 +15,4 @@ To run the site:
 
 ## License
 
-Farcaster Kit and its website are licensed under the MIT License.
+FarHack and its website are licensed under the MIT License.

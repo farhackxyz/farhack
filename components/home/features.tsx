@@ -10,29 +10,29 @@ interface FeaturesProps {}
 
 export const features = [
   {
-    name: 'Free & robust API',
+    name: 'Hosted at FarCon',
     description:
       'Use our free read/write API to build out your entire Farcaster app',
     icon: <FlashIcon className="stroke-black dark:stroke-white" />
   },
   {
-    name: 'Components & hooks',
+    name: `Sponsored by Farcaster's best`,
     description:
       'Comes out-of-the box with all the React components and hooks your app needs',
     icon: <CodeDocumentIcon className="stroke-black dark:stroke-white" />
-  },
-  {
-    name: 'Multi-provider',
-    description:
-      'Farcaster Kit is flexible to your setup -- easily switch out auth services & data providers, or even customize our components',
-    icon: <MagicIcon className="stroke-black dark:stroke-white" />
-  },
-  {
-    name: 'Auth',
-    description:
-      "Our robust auth components offer options across platforms such as Privy, Dynamic, RainbowKit, and Farcaster's AuthKit",
-    icon: <ServerIcon className="stroke-black dark:stroke-white" />
   }
+  // {
+  //   name: 'Multi-provider',
+  //   description:
+  //     'Farcaster Kit is flexible to your setup -- easily switch out auth services & data providers, or even customize our components',
+  //   icon: <MagicIcon className="stroke-black dark:stroke-white" />
+  // },
+  // {
+  //   name: 'Auth',
+  //   description:
+  //     "Our robust auth components offer options across platforms such as Privy, Dynamic, RainbowKit, and Farcaster's AuthKit",
+  //   icon: <ServerIcon className="stroke-black dark:stroke-white" />
+  // }
 ];
 
 const Features: FC<FeaturesProps> = () => {

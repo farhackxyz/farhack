@@ -5,17 +5,7 @@ import { useRouter } from 'next/router';
 import { useConfig } from 'nextra-theme-docs';
 
 import { tvs } from '@components';
-import FarcasterKitLogo from '@components/logo/farcasterkit-logo';
-
-import pkg from './package.json';
-
-const DEFAULT_VERSION = '1.0.1';
-
-const getVersion = () => {
-  return (
-    pkg?.dependencies?.['farcasterkit']?.replace('^', '') ?? DEFAULT_VERSION
-  );
-};
+import FarcasterKitLogo from '@components/logo/farhack-logo';
 
 const config: DocsThemeConfig = {
   darkMode: true,
@@ -26,11 +16,8 @@ const config: DocsThemeConfig = {
     <div className="flex items-center">
       <FarcasterKitLogo height={50} width={50} />
       <b className="ml-2 hidden text-sm font-semibold sm:block sm:text-base">
-        Farcaster Kit
+        FarHack
       </b>
-      <span className={tvs.badge({ class: 'hidden sm:flex' })}>
-        v{getVersion()}
-      </span>
     </div>
   ),
   head: function useHead() {
@@ -76,9 +63,9 @@ const config: DocsThemeConfig = {
         <meta content="summary_large_image" name="twitter:card" />
         <meta content="@Dylan_Steck" name="twitter:site" />
         <meta content={image} name="twitter:image" />
-        <meta content={`${config.title} – Farcaster Kit`} name="og:title" />
+        <meta content={`${config.title} – FarHack`} name="og:title" />
         <meta content={image} name="og:image" />
-        <meta content="Farcaster Kit" name="apple-mobile-web-app-title" />
+        <meta content="FarHack" name="apple-mobile-web-app-title" />
       </>
     );
   },
@@ -86,7 +73,7 @@ const config: DocsThemeConfig = {
     const router = useRouter();
     const { frontMatter } = useConfig();
 
-    const defaultTitle = frontMatter.overrideTitle || 'Farcaster Kit';
+    const defaultTitle = frontMatter.overrideTitle || 'FarHack';
 
     return {
       description: frontMatter.description,
@@ -106,9 +93,7 @@ const config: DocsThemeConfig = {
   footer: {
     text: (
       <div className="flex w-full flex-col items-center sm:items-start">
-        <p className="mt-6 text-xs">
-          MIT {new Date().getFullYear()} Farcaster Kit.
-        </p>
+        <p className="mt-6 text-xs">MIT {new Date().getFullYear()} FarHack.</p>
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
 import { tvs, LinkIcon, Snippet } from '@components';
-import FarcasterKitLogo from '@components/logo/farcasterkit-logo';
+import FarcasterKitLogo from '@components/logo/farhack-logo';
 
 import GradientBG from './gradient-bg';
 
@@ -48,7 +48,6 @@ const Hero: FC<HeroProps> = () => {
           </span>
         </a>
       </div>
-      <Snippet className="z-10" />
     </section>
   );
 };

@@ -8,7 +8,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
       <Component {...pageProps} />
-      {isProd && <Analytics />}
+      {/* {isProd && <Analytics />} */}
     </>
   );
 };

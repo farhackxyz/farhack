@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { tvs, LinkIcon, Snippet } from '@components';
 import FarcasterKitLogo from '@components/logo/farhack-logo';
 import { karla, lora } from '@utils/fonts';
+import { rsvpUrl } from '@utils/index';
 
 import GradientBG from './gradient-bg';
 
@@ -48,10 +49,10 @@ const Hero: FC<HeroProps> = () => {
             flat: true,
             color: 'neutral'
           })}
-          href="/#"
+          href={rsvpUrl}
           rel="noopener noreferrer"
           target="_blank"
-          title="github homepage"
+          title="rsvp url"
         >
           <span className={tvs.box({ row: true })}>
             RSVP

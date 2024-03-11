@@ -1,6 +1,6 @@
-# FarHack's Website and Docs
+# FarHack's Website and Hacking Guide
 
-![FarHack banner](https://i.imgur.com/ya9WFYL.png)
+![FarHack.xyz header](https://i.imgur.com/YOucFuO.png)
 
 ## Getting Started
 

@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-import fs from 'node:fs';
-
 import { type FrameMetadata, getFrameMetadata } from 'frog';
 import { useState, useEffect } from 'react';
 
@@ -20,10 +17,8 @@ export const useMetadata = (url) => {
     const fetchMetadata = async () => {
       setIsLoading(true);
       try {
-        console.log('Fetching metadata for', url);
         const fetchedMetadata = await getFrameMetadata(url);
 
-        console.log('data', fetchedMetadata);
         setMetadata(fetchedMetadata);
         setError(null);
       } catch (e) {

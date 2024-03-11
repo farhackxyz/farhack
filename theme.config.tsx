@@ -27,9 +27,7 @@ const config: DocsThemeConfig = {
     const description =
       config.frontMatter.description || 'The ultimate Farcaster hackathon';
     const image = config.frontMatter.image || openGraphBanner;
-    const url = process.env.VERCEL_URL
-      ? `${process.env.VERCEL_URL}/api`
-      : 'http://localhost:3000/api';
+    const url = 'https://farhack.xyz/api';
     const { metadata, isLoading, error } = useMetadata(url);
 
     return (
@@ -71,16 +69,17 @@ const config: DocsThemeConfig = {
         {metadata !== null &&
           !isLoading &&
           !error &&
-          metadata.map((item: any, key: number) => {
-            // eslint-disable-next-line react/jsx-key
-            return (
-              <meta
-                key={`frame-tag-${key}`}
-                content={item.content}
-                name={item.property}
-              />
-            );
-          })}
+          metadata
+            .filter((item) => item.content !== 'Frog Frame')
+            .map((item: any, key: number) => {
+              return (
+                <meta
+                  key={`frame-tag-${key}`}
+                  content={item.content}
+                  name={item.property}
+                />
+              );
+            })}
       </>
     );
   },

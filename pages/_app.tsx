@@ -1,7 +1,6 @@
 import { Inter } from 'next/font/google';
 
 import '../styles/global.css';
-import { openGraphBanner } from '@utils/index';
 
 const App = ({ Component, pageProps }) => {
   return (

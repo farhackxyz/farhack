@@ -27,7 +27,9 @@ const config: DocsThemeConfig = {
     const description =
       config.frontMatter.description || 'The ultimate Farcaster hackathon';
     const image = config.frontMatter.image || openGraphBanner;
-    const url = 'http://localhost:3000/api';
+    const url = process.env.VERCEL_URL
+      ? `${process.env.VERCEL_URL}/api`
+      : 'http://localhost:3000/api';
     const { metadata, isLoading, error } = useMetadata(url);
 
     return (

@@ -1,12 +1,6 @@
 {
-  "introduction": {
-    "title": "Introduction"
-  },
+  "introduction": "Introduction",
   "getting-started": "Getting Started",
-  "components": "Components",
-  "hooks": "Hooks",
-  "providers": "Providers",
-  "api-reference": "API Reference",
-  "examples": "Examples",
+  "tutorials": "Tutorials",
   "faq": "FAQ"
 }

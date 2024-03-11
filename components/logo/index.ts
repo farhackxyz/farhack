@@ -1,1 +1,2 @@
-export { default as FarcasterKitLogo } from './farhack-logo';
+export { default as FarhackLogo } from './farhack-logo';
+export { default as FarhackPartnersLogo } from './farhack-partners-logo';

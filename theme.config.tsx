@@ -8,7 +8,7 @@ import { tvs } from '@components';
 import FarcasterKitLogo from '@components/logo/farhack-logo';
 
 const config: DocsThemeConfig = {
-  darkMode: true,
+  darkMode: false,
   nextThemes: {
     defaultTheme: 'dark'
   },
@@ -82,10 +82,9 @@ const config: DocsThemeConfig = {
     };
   },
   project: {
-    link: 'https://github.com/dylsteck/farcasterkit'
+    link: 'https://github.com/dylsteck/farhack'
   },
-  docsRepositoryBase:
-    'https://github.com/dylsteck/farcasterkit/tree/main/apps/web',
+  docsRepositoryBase: 'https://github.com/dylsteck/farhack/tree/main/apps/web',
   gitTimestamp: '',
   sidebar: {
     defaultMenuCollapseLevel: 1

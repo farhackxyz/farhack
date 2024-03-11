@@ -15,7 +15,7 @@ const FarhackLogo: FC<LogoProps> = (props) => {
 
   return (
     <Image
-      alt="FarHack logo"
+      alt="Farhack logo"
       className={`${className}`}
       height={height}
       objectFit="contain"

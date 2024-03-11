@@ -14,6 +14,11 @@ To run the site:
 - **Install dependencies:** `pnpm i`
 - **Run locally:** `pnpm dev`
 
+## Contributing
+
+Are you an ecosystem tool or developer who wants to improve these docs for Farcaster devs?
+Check out [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+
 
 ## License
 

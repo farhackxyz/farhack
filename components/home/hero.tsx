@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { tvs, LinkIcon, Snippet } from '@components';
+import { tvs, LinkIcon } from '@components';
 import FarcasterKitLogo from '@components/logo/farhack-logo';
 import { karla, lora } from '@utils/fonts';
 import { rsvpUrl } from '@utils/index';

@@ -65,15 +65,13 @@ const TooltipContent: FC<TooltipContentProps> = ({
 
 const Tooltip: FC<TooltipProps> = (props) => {
   const state = useTooltipTriggerState(props);
-  const ref = useRef();
-
-  // Get props for the trigger and its tooltip
+  const ref = useRef<HTMLElement | null>(null);
   const { triggerProps, tooltipProps } = useTooltipTrigger(props, state, ref);
 
   return (
     <span className="relative">
       <button
-        ref={ref}
+        ref={ref as unknown as React.RefObject<HTMLButtonElement>}
         className="flex items-center rounded-sm"
         {...triggerProps}
         onClick={props.onClick}

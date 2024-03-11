@@ -4,7 +4,7 @@
 
 ## Getting Started
 
-Visit [farhack.com](https://farhack.xyz) to learn more about FarHack, which is happening at [FarCon](https://farcon.xyz) from May 3 - 5, 2024 in Venice Beach.
+Visit [farhack.xyz](https://farhack.xyz) to learn more about FarHack, which is happening at [FarCon](https://farcon.xyz) from May 3 - 5, 2024 in Venice Beach.
 
 ## About the site
 

@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 
-import { tvs, LinkIcon } from '@components';
-import FarcasterKitLogo from '@components/logo/farhack-logo';
+import { tvs, LinkIcon, FarhackLogo } from '@components';
 import { karla, lora } from '@utils/fonts';
 import { rsvpUrl } from '@utils/index';
 
@@ -19,7 +18,7 @@ const Hero: FC<HeroProps> = () => {
       {/* <AnimatedWave className="absolute -z-10 h-[100%] w-[100%] -translate-y-32 md:h-[500px] md:w-[500px] md:-translate-y-44" /> */}
       <GradientBG className="absolute -z-10 aspect-[605/509] w-full -translate-y-[40%] animate-[appear_1s_ease]" />
       <div className={tvs.box({ class: 'relative z-10 w-full' })}>
-        <FarcasterKitLogo height={250} width={250} />
+        <FarhackLogo height={250} width={250} />
         <h1 className="mt-4 text-center text-4xl text-black dark:text-white md:text-5xl">
           <span className={`font-bold ${karla.className}`}>FarHack</span>
           <span className={`font-light ${lora.className}`}> at FarCon</span>

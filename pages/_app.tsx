@@ -1,23 +1,7 @@
-import type { Metadata } from 'next';
-
 import { Inter } from 'next/font/google';
-import { getFrameMetadata } from 'frog/next';
 
 import '../styles/global.css';
 import { openGraphBanner } from '@utils/index';
-
-export async function generateMetadata(): Promise<Metadata> {
-  const url = process.env.VERCEL_URL || 'http://localhost:3000';
-  const frameMetadata = await getFrameMetadata(`${url}/api`);
-
-  return {
-    title: 'FarHack at FarCon',
-    description: 'The ultimate Farcaster hackathon',
-    metadataBase: new URL('https://farhack.xyz'),
-    openGraph: { images: [openGraphBanner] },
-    other: frameMetadata
-  };
-}
 
 const App = ({ Component, pageProps }) => {
   return (

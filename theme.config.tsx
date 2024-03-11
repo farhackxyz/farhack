@@ -63,9 +63,14 @@ const config: DocsThemeConfig = {
         <meta content="summary_large_image" name="twitter:card" />
         <meta content="@Dylan_Steck" name="twitter:site" />
         <meta content={image} name="twitter:image" />
+        <meta
+          content="The ultimate Farcaster hackathon"
+          property="twitter:description"
+        />
         <meta content={`FarHack`} name="og:title" />
         <meta content={image} name="og:image" />
         <meta content="FarHack" name="apple-mobile-web-app-title" />
+        <meta content="https://farhack.xyz" property="og:url" />
         {metadata !== null &&
           !isLoading &&
           !error &&
@@ -76,7 +81,7 @@ const config: DocsThemeConfig = {
                 <meta
                   key={`frame-tag-${key}`}
                   content={item.content}
-                  name={item.property}
+                  property={item.property}
                 />
               );
             })}

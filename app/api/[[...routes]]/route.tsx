@@ -56,7 +56,9 @@ app.frame('/', (c) => {
           ]
         : [
             <Button value="back">Back</Button>,
-            <Button action={rsvpUrl}>Continue to RSVP</Button>
+            <Button.Redirect location={rsvpUrl}>
+              Continue to RSVP
+            </Button.Redirect>
           ]
   });
 });

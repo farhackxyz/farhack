@@ -26,7 +26,7 @@ const Hero: FC<HeroProps> = () => {
         <p
           className={`mt-2 text-center text-2xl font-medium text-white ${karla.className}`}
         >
-          May 3 - 5, Venice Beach, CA, USA
+          May 3 - 5, Santa Monica, CA, USA
         </p>
         <p
           className={`mt-5 max-w-[75vw] text-center text-lg text-white md:max-w-[60vw] ${karla.className}`}
@@ -39,7 +39,7 @@ const Hero: FC<HeroProps> = () => {
       <div className={tvs.box({ row: true, class: 'z-10 gap-2' })}>
         <a
           className={tvs.button({ color: 'purple' })}
-          href="/docs/introduction"
+          href="/hacking-guide/welcome"
         >
           Hacking Guide
         </a>

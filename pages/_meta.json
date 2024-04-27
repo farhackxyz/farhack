@@ -4,11 +4,17 @@
     "type": "page",
     "display": "hidden"
   },
-  "docs": {
-    "title": "Docs",
+  "hacking-guide": {
+    "title": "Hacking Guide",
     "type": "page",
     "theme": {
       "footer": false
     }
+  },
+  "faq": {
+    "title": "FAQ",
+    "type": "page",
+    "href": "/hacking-guide/faq",
+    "newWindow": false
   }
 }

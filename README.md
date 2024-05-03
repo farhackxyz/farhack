@@ -1,10 +1,10 @@
 # FarHack's Website and Hacking Guide
 
-![FarHack.xyz header](https://i.imgur.com/YOucFuO.png)
+![FarHack at Chapter One banner](https://i.imgur.com/MGJSQP3.jpeg)
 
 ## Getting Started
 
-Visit [farhack.xyz](https://farhack.xyz) to learn more about FarHack, which is happening at [FarCon](https://farcon.xyz) from May 3 - 5, 2024 in Venice Beach.
+Visit [farhack.xyz](https://farhack.xyz) to learn more about FarHack, which is happening at Chapter One in Santa Monica from May 3 - 5, 2024.
 
 ## About the site
 

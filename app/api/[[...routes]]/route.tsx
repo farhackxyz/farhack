@@ -1,67 +1,50 @@
-/* eslint-disable react/jsx-key */
 /** @jsxImportSource frog/jsx */
 
-import { Button, Frog } from 'frog';
-import { handle } from 'frog/vercel';
+import { FARHACK_RECAP_BANNER_URL, masonryGridImages } from '@/lib/utils'
+import { Button, Frog, TextInput } from 'frog'
+import { devtools } from 'frog/dev'
+import { handle } from 'frog/next'
+import { serveStatic } from 'frog/serve-static'
 
-import {
-  framePageOne,
-  framePageTwo,
-  framePageThree,
-  framePageFour,
-  rsvpUrl
-} from '@utils/index';
-
-type State = {
-  count: number;
-};
-
-const app = new Frog<{ State: State }>({
+const app = new Frog({
+  assetsPath: '/',
   basePath: '/api',
   initialState: {
     count: 0
   }
-});
+})
 
-app.frame('/', (c) => {
-  const { buttonValue, deriveState } = c;
-  const state = deriveState((previousState) => {
-    if (buttonValue === 'next' && previousState.count < 3)
+// Uncomment to use Edge Runtime
+// export const runtime = 'edge'
+
+app.frame('/', async(c) => {
+  const { buttonValue, status, deriveState } = c
+  const state = deriveState((previousState: any) => {
+    if (buttonValue === 'next')
       previousState.count++;
     if (buttonValue === 'back') previousState.count--;
-  });
+    if(buttonValue === 'restart') previousState.count = 1;
+  }) as unknown as any;
 
   return c.res({
-    image:
-      state.count === 0
-        ? framePageOne
-        : state.count === 1
-        ? framePageTwo
-        : state.count === 2
-        ? framePageThree
-        : framePageFour,
+    image: state.count === 0 ? FARHACK_RECAP_BANNER_URL : masonryGridImages[state.count - 1].src,
     imageAspectRatio: '1:1',
-    intents:
-      state.count === 0
-        ? [<Button value="next">Continue to RSVP</Button>]
-        : state.count === 1
-        ? [
-            <Button value="back">Back</Button>,
-            <Button value="next">Continue to RSVP</Button>
-          ]
-        : state.count === 2
-        ? [
-            <Button value="back">Back</Button>,
-            <Button value="next">Continue to RSVP</Button>
-          ]
-        : [
-            <Button value="back">Back</Button>,
-            <Button.Redirect location={rsvpUrl}>
-              Continue to RSVP
-            </Button.Redirect>
-          ]
-  });
-});
+    intents: state.count === 0 ? [
+      <Button value="next">View images</Button>,
+      <Button.Redirect location="https://farhack.xyz">Learn more</Button.Redirect>
+    ] : masonryGridImages.length === state.count ? 
+    [
+      <Button value="back">Back</Button>,
+      <Button value="restart">Restart</Button>
+    ] : 
+    [
+      <Button value="back">Back</Button>,
+      <Button value="next">Next</Button>
+    ]
+  })
+})
 
-export const GET = handle(app);
-export const POST = handle(app);
+devtools(app, { serveStatic })
+
+export const GET = handle(app)
+export const POST = handle(app)

@@ -22,7 +22,7 @@ export default function Info() {
                     <a
                         target="_blank"
                         href="https://warpcast.com/dylsteck.eth"
-                        className="flex flex-row items-center gap-2 max-w-[30%]"
+                        className="flex flex-row items-center gap-2 max-w-[50%] md:max-w-[30%]"
                     >
                         <img
                             src="https://i.imgur.com/Gk94uKf.png"

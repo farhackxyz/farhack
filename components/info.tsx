@@ -14,7 +14,7 @@ export default function Info() {
                     className="max-w-[90%] h-auto rounded-lg"
                 />
                 <p className={`pt-5 text-white font-light ${karla.className} max-w-[90%]`}>
-                    Thanks so much to everyone who attented the inaugural FarHack! I'm thrilled that we were able to
+                    Thanks so much to everyone who attended the inaugural FarHack! I'm thrilled that we were able to
                     spend a weekend uplifting and celebrating developers, and the quality of projects built was off the
                     charts. Hope to see you at another FarHack soon!
                 </p>

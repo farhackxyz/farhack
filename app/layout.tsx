@@ -31,6 +31,7 @@ export default function RootLayout({
       <meta property="fc:frame:image:aspect_ratio" content="1:1"/>
       <meta property="fc:frame:image" content="https://i.imgur.com/b82q35A.png"/>
       <meta property="fc:frame:post_url" content="https://farhack.xyz/api"/>
+      <meta property="fc:frame:state" content="%7B%22initialPath%22%3A%22%2Fapi%22%2C%22previousButtonValues%22%3A%5B%22next%22%2C%22_r%3Ahttps%3A%2F%2Ffarhack.xyz%22%5D%2C%22previousState%22%3A%7B%22count%22%3A0%7D%7D" />
       <meta property="fc:frame:button:1" content="View images" data-value="next"/>
       <meta property="fc:frame:button:1:action" content="post"/>
       <meta property="fc:frame:button:2" content="Learn more" data-type="redirect" data-value="_r:https://farhack.xyz"/>

@@ -59,6 +59,46 @@ export const masonryGridImages: MasonryGridImage[] = [
   {
     "alt": "The crowd watching final presentations on the final day of FarHack",
     "src": "https://i.imgur.com/nBKYw8s.jpeg"
+  },
+  {
+    "alt": "Hackers watching a lightning talk on the first day", 
+    "src": "https://i.imgur.com/3vi3Vyw.jpeg"
+  },
+  {
+    "alt": "The voting frame for FarHack, made by @horsefacts",
+    "src": "https://i.imgur.com/i783uiR.png"
+  },
+  {
+    "alt": "Hackers posing for a picture on the final morning of FarHack",
+    "src": "https://i.imgur.com/c3LGf5u.png"
+  },
+  {
+    "alt": "Hackers posing for a picture with FarHack hats on the first day",
+    "src": "https://i.imgur.com/TPG8EUm.png"
+  },
+  {
+    "alt": "A presentation on the final day of FarHack", 
+    "src": "https://i.imgur.com/dVJoAsy.png"
+  },
+  {
+    "alt": "Hackers preparing for the second day", 
+    "src": "https://i.imgur.com/jJG4LnG.png"
+  }, 
+  {
+    "alt": "Hackers celebrating on the final day of FarHack", 
+    "src": "https://i.imgur.com/2t8zAwM.png"
+  }, 
+  {
+    "alt": "Steve from Pinata giving a lightning talk on the first day of FarHack",
+    "src": "https://i.imgur.com/IYWrjD6.png"
+  },
+  {
+    "alt": "Hackers pairing up on their project on the monitors at FarHack", 
+    "src": "https://i.imgur.com/LCBAjNL.jpeg"
+  },
+  {
+    "alt": "Attendees watching the final presentations", 
+    "src": "https://i.imgur.com/MQYb1ZU.jpeg"
   }
 ]
 

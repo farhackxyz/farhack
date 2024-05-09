@@ -27,6 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.ico" sizes="any" />
+      <meta property="fc:frame" content="vNext"/>
+      <meta property="fc:frame:image:aspect_ratio" content="1:1"/>
+      <meta property="fc:frame:image" content="https://i.imgur.com/b82q35A.png"/>
+      <meta property="fc:frame:post_url" content="https://farhack.xyz/api"/>
+      <meta property="fc:frame:button:1" content="View images" data-value="next"/>
+      <meta property="fc:frame:button:1:action" content="post"/>
+      <meta property="fc:frame:button:2" content="Learn more" data-type="redirect" data-value="_r:https://farhack.xyz"/>
+      <meta property="fc:frame:button:2:action" content="post_redirect"/>
      <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}

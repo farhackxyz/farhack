@@ -111,7 +111,7 @@ export const prizes: Prize[] = [
   },
   {
     "company": "Pinata", 
-    "company_link": "https://pinata.xyz",
+    "company_link": "https://pinata.cloud",
     "prizes": "Best use of Pinata in a Farcaster Frame, Best Use of Pinata in a Cast Action, Best Channel Specific Client using Pinata Farcaster API",
     "prizes_link": "",
     "amounts": "$500 per bounty",
@@ -135,7 +135,7 @@ export const prizes: Prize[] = [
   },
   {
     "company": "Optimism", 
-    "company_link": "https://optimism.org",
+    "company_link": "https://optimism.io",
     "prizes": "Best App or Frame that spans the Superchain",
     "prizes_link": "https://www.bountycaster.xyz/bounty/0x402c9384cf263ae4ea8371196143bf88e916152b",
     "amounts": "$500 USDC",
@@ -167,7 +167,7 @@ export const prizes: Prize[] = [
   },
   {
     "company": "OpenRank", 
-    "company_link": "https://dynamic.xyz",
+    "company_link": "https://openrank.com",
     "prizes": "Best use of OpenRank in apps/clients",
     "prizes_link": "",
     "amounts": "$500",

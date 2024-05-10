@@ -1,4 +1,4 @@
-# FarHack's Website and Hacking Guide
+# FarHack
 
 ![Inaugural FarHack at Chapter One banner](https://i.imgur.com/J1Lch5m.png)
 

@@ -1,12 +1,22 @@
-import Info from "@/components/info";
-import MasonryGrid from "@/components/masonry-grid";
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
+import { auth } from "@/auth";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/login";
 
-export default function Home() {
-  return (
-    <main className="w-full h-full flex flex-col md:flex-row overflow-y-hidden">
-      <Info />
-      <MasonryGrid />
-    </main>
-  );
+export default async function Page() {
+  const session = await auth()
+  if (session?.user) {
+    // id is undefined, fix & also fetch from db
+    session.user = {
+      id: session.user.id,
+      name: session.user.name,
+      image: session.user.image,
+    }
+  }
+  if(session && session.user){
+    console.log("USER", session.user);
+    return <Login />
+  } else{
+    return <Login />
+  }
 }

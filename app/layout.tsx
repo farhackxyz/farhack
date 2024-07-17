@@ -1,56 +1,36 @@
-import { getFrameMetadata } from 'frog/next'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import { FARHACK_C1_BANNER_URL } from '@/lib/utils'
-import Script from 'next/script'
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
- 
-export async function generateMetadata(): Promise<Metadata> {
-  const url = process.env.VERCEL_URL || 'http://localhost:3000'
-  const frameMetadata = await getFrameMetadata(`${url}/api`)
-  return {
-    title: 'FarHack',
-    description: 'The ultimate Farcaster hackathon',
-    metadataBase: new URL("https://farhack.xyz"),
-    openGraph: {images:[FARHACK_C1_BANNER_URL]},
-    other: frameMetadata,
-  }
-}
+import type { Metadata } from "next";
+import { GeistSans } from 'geist/font/sans';
+import { SessionProvider } from "next-auth/react";
+import { auth } from '../auth';
 
-export default function RootLayout({
+export const metadata: Metadata = {
+  title: "Hack by FarHack",
+  description: "The ultimate Farcaster hackathon software, built by FarHack",
+};
+
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}): Promise<JSX.Element> {
+  const session = await auth()
+  if (session?.user) {
+    session.user = {
+      id: session.user.id,
+      name: session.user.name,
+      image: session.user.image,
+    }
+  }
+
   return (
     <html lang="en">
-      <link rel="icon" href="/favicon.ico" sizes="any" />
-      <meta property="fc:frame" content="vNext"/>
-      <meta property="fc:frame:image:aspect_ratio" content="1:1"/>
-      <meta property="fc:frame:image" content="https://i.imgur.com/b82q35A.png"/>
-      <meta property="fc:frame:post_url" content="https://farhack.xyz/api"/>
-      <meta property="fc:frame:state" content="%7B%22initialPath%22%3A%22%2Fapi%22%2C%22previousButtonValues%22%3A%5B%22next%22%2C%22_r%3Ahttps%3A%2F%2Ffarhack.xyz%22%5D%2C%22previousState%22%3A%7B%22count%22%3A0%7D%7D" />
-      <meta property="fc:frame:button:1" content="View images" data-value="next"/>
-      <meta property="fc:frame:button:1:action" content="post"/>
-      <meta property="fc:frame:button:2" content="Learn more" data-type="redirect" data-value="_r:https://farhack.xyz"/>
-      <meta property="fc:frame:button:2:action" content="post_redirect"/>
-     <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
-      <Script strategy="lazyOnload" id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-          page_path: window.location.pathname,
-          });
-        `}
-      </Script>
-      <body className={inter.className}>{children}</body>
+      <body className={`${GeistSans.className} dark bg-black`}>
+        <SessionProvider basePath={"/api/auth"} session={session}>
+          {children}
+        </SessionProvider>
+      </body>
     </html>
-  )
+  );
 }

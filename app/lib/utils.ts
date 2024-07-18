@@ -10,5 +10,25 @@ export const karla = Karla({
   display: 'swap'
 });
 
-export const FARHACK_RECAP_BANNER_URL = "https://i.imgur.com/b82q35A.png";
-export const FARHACK_C1_BANNER_URL = "https://i.imgur.com/J1Lch5m.png";
+export const images = [
+  { 
+    src: "https://i.imgur.com/m2qIvVE.png",
+    alt: "FarHack at FarCon Announcement Frame Square Picture"
+  },
+  { 
+    src: "https://i.imgur.com/b82q35A.png",
+    alt: "FarHack at FarCon Slideshow Frame Square Picture"
+  },
+  { 
+    src: "https://i.imgur.com/J1Lch5m.png",
+    alt: "FarHack at FarCon Hosted by Chapter One Banner"
+  },
+  {
+    src: "https://i.imgur.com/UrNV4yL.png",
+    alt: "Edcon 2024 Hackathon Powered by FarHack Square Picture"
+  },
+  {
+    src: "https://i.imgur.com/T6K0wdv.png",
+    alt: "Edcon 2024 Hackathon Powered by FarHack Banner"
+  }
+];

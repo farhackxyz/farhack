@@ -260,7 +260,7 @@ function PrizesTable() {
   );
 }
 
-export const masonryGridImages = [
+const masonryGridImages = [
   {
     "alt": "FarHack at FarCon poster",
     "src": "https://i.imgur.com/hAeS72B.jpeg"
@@ -343,7 +343,7 @@ export const masonryGridImages = [
   }
 ];
 
-export const overallWinners = [
+const overallWinners = [
   {
     "place": 1,
     "name": "Memecaster",
@@ -381,7 +381,7 @@ export const overallWinners = [
   }
 ];
 
-export const prizes = [
+const prizes = [
   {
     "company": "Airstack",
     "company_link": "https://airstack.xyz",

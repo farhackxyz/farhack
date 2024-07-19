@@ -43,6 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             id: fid,
             name: credentials?.name as string,
             image: credentials?.pfp as string,
+            is_admin: false,
           }).execute();
 
           user = await db.selectFrom('users')

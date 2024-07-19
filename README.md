@@ -1,10 +1,8 @@
 # FarHack
 
-![Inaugural FarHack at Chapter One banner](https://i.imgur.com/J1Lch5m.png)
+![FarHack banner](https://i.imgur.com/IzrcL7A.jpeg)
 
-## Getting Started
-
-Visit [farhack.xyz](https://farhack.xyz) to recap the inaugural FarHack, which took place at Chapter One in Santa Monica from May 3 - 5, 2024. Stay tuned for more from FarHack in the future!
+FarHack is the ultimate Farcaster hackathon. This repo houses our in-house hackathon software.
 
 ## Running the site locally
 - **Install dependencies:** `npm install`
@@ -12,4 +10,4 @@ Visit [farhack.xyz](https://farhack.xyz) to recap the inaugural FarHack, which t
 
 ## License
 
-FarHack's website is licensed under the MIT License.
+FarHack's website and hackathon software are licensed under the MIT License.

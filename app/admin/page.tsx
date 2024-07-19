@@ -5,7 +5,7 @@ import { db } from "../../kysely";
 import { headers } from "next/headers";
 import WarpcastIcon from '../components/icons/warpcast-icon';
 
-export default async function AdminPanel() {
+export default async function AdminPage() {
   const headerList = headers();
   const pathname = headerList.get("x-current-path");
   const username = pathname ? pathname.split('/').pop() : undefined;
@@ -35,6 +35,7 @@ export default async function AdminPanel() {
 
   const hackathons = await db.selectFrom('hackathons')
     .selectAll()
+    .orderBy('start_date', 'desc')
     .execute();
 
   return (
@@ -63,7 +64,11 @@ export default async function AdminPanel() {
               <tbody>
                 {hackathons.map(hackathon => (
                   <tr key={hackathon.id} className="bg-gray-900 text-white hover:bg-gray-700">
-                    <td className="border px-4 py-2">{hackathon.name}</td>
+                    <td className="border px-4 py-2 underline">
+                      <a href={`/hackathons/${hackathon.slug}`}>
+                        {hackathon.name}
+                      </a>
+                    </td>
                     <td className="border px-4 py-2">{hackathon.description}</td>
                     <td className="border px-4 py-2">{new Date(hackathon.start_date).toLocaleDateString()}</td>
                     <td className="border px-4 py-2">{new Date(hackathon.end_date).toLocaleDateString()}</td>

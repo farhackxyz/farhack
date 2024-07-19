@@ -39,7 +39,6 @@ export default async function HackathonBySlugPage() {
                     <p className="text-3xl font-medium">Schedule</p>
                     <div className="text-lg">
                         <p>Dates: {startDate} - {endDate}</p>
-                        <p>Full schedule coming soon!</p>
                     </div>
                 </div>
             </div>

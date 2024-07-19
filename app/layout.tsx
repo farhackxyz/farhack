@@ -46,14 +46,14 @@ export default async function RootLayout({
               <SignInWithFarcaster />
             </div>
             {children}
-            <div className="pl-5 pb-10 md:pb-0 pt-0 md:pt-7.5 mb-7.5 md:mb-0 flex flex-col md:flex-row gap-4 items-center relative md:absolute bottom-0">
+            {/* <div className="pl-5 pb-10 md:pb-0 pt-0 md:pt-7.5 mb-7.5 md:mb-0 flex flex-col md:flex-row gap-4 items-center relative md:absolute bottom-0">
               <a target="_blank" href="https://warpcast.com/~/channel/farhack">
                 <WarpcastIcon />
               </a>
               <a target="_blank" href="https://github.com/dylsteck/farhack">
                 <GithubIcon />
               </a>
-            </div>
+            </div> */}
           </div>
         </SessionProvider>
       </body>

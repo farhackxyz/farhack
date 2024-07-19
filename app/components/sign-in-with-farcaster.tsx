@@ -65,13 +65,13 @@ function Content() {
         </div>
       ) : (
         <div className="relative">
-          <div className="text-white pt-2 flex-row gap-2 items-center hidden md:flex">
-            <a href={`/profiles/${session.user?.name}`} className="flex flex-row gap-2 items-center border border-white border-1 rounded-md pl-1.5 pr-1.5 px-2.5 py-1">
+          <div className="pt-2 flex-row gap-2 items-center hidden md:flex">
+            <a href={`/profiles/${session.user?.name}`} className="flex flex-row gap-2 items-center bg-fcPurple text-white border-1 rounded-full px-2 py-1 pl-2 pr-2 cursor-pointer">
               <img src={session.user?.image ?? ""} alt="User Image" className="w-8 h-8 rounded-full" />
               <p>{session.user?.name}</p>
             </a>
-            <div className="flex justify-center items-center border border-white border-1 rounded-md pl-1.5 pr-1.5 px-3 py-2 cursor-pointer" onClick={() => signOut()}>
-              <p className="font-medium text-red-500">Sign out</p>
+            <div className="flex flex-row gap-2 items-center bg-red-500 text-white border-1 rounded-full px-2 py-2 pl-3 pr-3 cursor-pointer" onClick={() => signOut()}>
+              <p className="font-medium">Sign out</p>
             </div>
           </div>
           <div className="text-white pt-2 flex flex-col items-center md:hidden">

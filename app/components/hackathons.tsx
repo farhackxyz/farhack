@@ -43,7 +43,7 @@ export default async function Hackathons() {
       >
         <p className="text-2xl md:text-3xl font-semibold">Hackathons</p>
         <div className="pt-5">
-          <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+          <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <div>
               <p className="text-lg md:text-xl font-medium pb-2">Upcoming</p>
               <div className="grid gap-10 grid-cols-1">

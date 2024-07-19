@@ -1,7 +1,6 @@
-import "./globals.css";
-
+/* eslint-disable @next/next/no-img-element */
+import './globals.css'
 import type { Metadata } from "next";
-import { GeistSans } from 'geist/font/sans';
 import { SessionProvider } from "next-auth/react";
 import { auth } from '../auth';
 import { images, karla } from "./lib/utils";
@@ -36,7 +35,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${karla.className} dark bg-black`}>
         <SessionProvider basePath={"/api/auth"} session={session}>
-        <div className="flex flex-col gap-4 min-h-screen">
+          <div className="flex flex-col gap-4 min-h-screen">
             <a href="/">
               <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
                 <FarhackLogo width={35} height={35} />
@@ -47,7 +46,7 @@ export default async function RootLayout({
               <SignInWithFarcaster />
             </div>
             {children}
-            <div className="pl-5 pb-10 md:pb-0 pt-0 md:pt-7.5 mb-7.5 md:mb-0 flex flex-row gap-4 items-center relative md:absolute bottom-0">
+            <div className="pl-5 pb-10 md:pb-0 pt-0 md:pt-7.5 mb-7.5 md:mb-0 flex flex-col md:flex-row gap-4 items-center relative md:absolute bottom-0">
               <a target="_blank" href="https://warpcast.com/~/channel/farhack">
                 <WarpcastIcon />
               </a>

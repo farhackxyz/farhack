@@ -4,7 +4,7 @@
 import "@farcaster/auth-kit/styles.css";
 import { useSession, signIn, signOut, getCsrfToken } from "next-auth/react";
 import { SignInButton, AuthKitProvider, StatusAPIResponse } from "@farcaster/auth-kit";
-import React from "react";
+import React, { useState } from "react";
 import { karla } from "../lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -29,6 +29,7 @@ export default function SignInWithFarcaster() {
 function Content() {
   const { data: session } = useSession();
   const [error, setError] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const getNonce = React.useCallback(async () => {
     const nonce = await getCsrfToken();
@@ -53,7 +54,7 @@ function Content() {
   return (
     <div>
       {!session ? (
-        <div className={karla.className}>
+        <div className={`${karla.className} text-white`}>
           <SignInButton
             nonce={getNonce}
             onSuccess={handleSuccess}
@@ -63,17 +64,26 @@ function Content() {
           {error && <div>Unable to sign in at this time.</div>}
         </div>
       ) : (
-        <div className="text-white pt-2 flex flex-row gap-2 items-center">
-          <a href={`/profiles/${session.user?.name}`} className="flex flex-row gap-2 items-center border border-white border-1 rounded-md pl-1.5 pr-1.5 px-2.5 py-1">
-            <img src={session.user?.image ?? ""} alt="User Image" className="w-8 h-8 rounded-full" />
-            <p>
-                {session.user?.name}
-            </p>
-          </a>
-          <div className="flex justify-center items-center border border-white border-1 rounded-md pl-1.5 pr-1.5 px-2.5 py-2 cursor-pointer" onClick={() => signOut()}>
-            <p className="font-medium text-red-500">
-                Sign out
-            </p>
+        <div className="relative">
+          <div className="text-white pt-2 flex-row gap-2 items-center hidden md:flex">
+            <a href={`/profiles/${session.user?.name}`} className="flex flex-row gap-2 items-center border border-white border-1 rounded-md pl-1.5 pr-1.5 px-2.5 py-1">
+              <img src={session.user?.image ?? ""} alt="User Image" className="w-8 h-8 rounded-full" />
+              <p>{session.user?.name}</p>
+            </a>
+            <div className="flex justify-center items-center border border-white border-1 rounded-md pl-1.5 pr-1.5 px-3 py-2 cursor-pointer" onClick={() => signOut()}>
+              <p className="font-medium text-red-500">Sign out</p>
+            </div>
+          </div>
+          <div className="text-white pt-2 flex flex-col items-center md:hidden">
+            <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex flex-row gap-2 items-center border border-white border-1 rounded-md px-2.5 py-1">
+              <img src={session.user?.image ?? ""} alt="User Image" className="w-8 h-8 rounded-full" />
+              <p>{session.user?.name}</p>
+            </button>
+            {dropdownOpen && (
+              <div className="absolute top-12 right-0 bg-black border border-white rounded-md shadow-lg py-2 mt-2">
+                <button onClick={() => signOut()} className="w-full text-left px-4 py-2 text-red-500">Sign out</button>
+              </div>
+            )}
           </div>
         </div>
       )}

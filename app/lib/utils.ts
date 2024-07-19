@@ -30,5 +30,9 @@ export const images = [
   {
     src: "https://i.imgur.com/T6K0wdv.png",
     alt: "Edcon 2024 Hackathon Powered by FarHack Banner"
+  },
+  {
+    src: "https://i.imgur.com/oJBPMye.png",
+    alt: "FarHack Test Square Picture"
   }
 ];

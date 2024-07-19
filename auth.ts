@@ -28,7 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
 
         const { success, fid } = verifyResponse;
-
+  
         if (!success) {
           return null;
         }
@@ -54,7 +54,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!user) {
           return null;
         }
-
         return {
           id: user.id.toString(),
           name: user.name,

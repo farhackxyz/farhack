@@ -7,6 +7,7 @@ import HackathonNav from '@/app/components/hackathon-nav';
 import InviteButton from '@/app/components/invite-button';
 import CreateTeamButton from '@/app/components/create-team-button';
 import DeleteOrLeaveTeamButton from '@/app/components/delete-or-leave-team-button';
+import EditOrSubmitTeamButton from '@/app/components/edit-or-submit-team-button';
 import { redirect } from 'next/navigation';
 
 export default async function YourTeamPage() {
@@ -60,14 +61,17 @@ export default async function YourTeamPage() {
             .execute();
     }
 
-    async function createTeam(name: string) {
+    async function createTeam(name: string, description: string) {
         'use server';
+        const emptyJsonArray = JSON.stringify([]);
         await db.insertInto('teams').values({
             name: name,
-            description: '',
+            description: description,
             hackathon_id: hackathon?.id ?? 0,
             fids: [user?.id ?? 0],
-            submitted_at: new Date()
+            submitted_at: new Date(),
+            wallet_address: '',
+            embeds: sql`${emptyJsonArray}::jsonb`
         }).execute();
     }
 
@@ -82,7 +86,7 @@ export default async function YourTeamPage() {
     async function handleDeleteTeam() {
         'use server';
         await db.deleteFrom('teams').where('id', '=', team?.id ?? 0).execute();
-        redirect(pathname);
+        redirect('/hackathons/' + hackathon?.slug + '/your-team');
     }
 
     async function handleLeaveTeam() {
@@ -91,7 +95,25 @@ export default async function YourTeamPage() {
             .set({ fids: sql`array_remove(fids, ${user?.id ?? 0})` })
             .where('id', '=', team?.id ?? 0)
             .execute();
-        redirect(pathname);
+        redirect('/hackathons/' + hackathon?.slug + '/your-team');
+    }
+
+    async function handleSaveTeam(name: string, description: string, walletAddress: string, embeds: any) {
+        'use server';
+        await db.updateTable('teams')
+            .set({ name, description, wallet_address: walletAddress, embeds: sql`${JSON.stringify(embeds)}::jsonb` })
+            .where('id', '=', team?.id ?? 0)
+            .execute();
+        redirect('/hackathons/' + hackathon?.slug + '/your-team');
+    }
+
+    async function handleSubmitTeam(name: string, description: string, walletAddress: string, embeds: any) {
+        'use server';
+        await db.updateTable('teams')
+            .set({ name, description, wallet_address: walletAddress, embeds: sql`${JSON.stringify(embeds)}::jsonb`, submitted_at: new Date() })
+            .where('id', '=', team?.id ?? 0)
+            .execute();
+        redirect('/hackathons/' + hackathon?.slug + '/your-team');
     }
 
     return (
@@ -113,14 +135,28 @@ export default async function YourTeamPage() {
                                 ))}
                             </ul>
                         </div>
-                        <InviteButton handleGenerateInvite={handleGenerateInvite} />
-                        <DeleteOrLeaveTeamButton 
-                            teamId={team.id} 
-                            userId={user.id} 
-                            teamMembers={teamMembers} 
-                            handleDeleteTeam={handleDeleteTeam} 
-                            handleLeaveTeam={handleLeaveTeam} 
-                        />
+                        {!team.submitted_at && (
+                            <InviteButton handleGenerateInvite={handleGenerateInvite} />
+                        )}
+                        {!team.submitted_at && (
+                            <DeleteOrLeaveTeamButton 
+                                teamId={team.id} 
+                                userId={user.id} 
+                                teamMembers={teamMembers} 
+                                handleDeleteTeam={handleDeleteTeam} 
+                                handleLeaveTeam={handleLeaveTeam} 
+                            />
+                        )}
+                        {team.submitted_at ? (
+                            <p className="text-sm mt-3">Submitted at: {new Date(team.submitted_at).toLocaleString()}</p>
+                        ) : (
+                            <EditOrSubmitTeamButton 
+                                team={team} 
+                                hackathonEndDate={hackathon.end_date.toISOString()}
+                                handleSaveTeam={handleSaveTeam}
+                                handleSubmitTeam={handleSubmitTeam}
+                            />
+                        )}
                     </>
                 ) : (
                     <div className="text-white flex flex-col gap-1 items-start">

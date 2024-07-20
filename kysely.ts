@@ -31,6 +31,8 @@ export interface TeamsTable {
   description: string;
   hackathon_id: number;
   submitted_at: Date;
+  wallet_address: string;
+  embeds: Json;
 }
 
 export interface HackathonsTable {

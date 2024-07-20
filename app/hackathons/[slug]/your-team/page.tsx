@@ -60,11 +60,11 @@ export default async function YourTeamPage() {
             .execute();
     }
 
-    async function createTeam(name: string, description: string) {
+    async function createTeam(name: string) {
         'use server';
         await db.insertInto('teams').values({
             name: name,
-            description: description,
+            description: '',
             hackathon_id: hackathon?.id ?? 0,
             fids: [user?.id ?? 0],
             submitted_at: new Date()

@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 export default function CreateTeamButton({ createTeam }: { createTeam: any }) {
     const [showModal, setShowModal] = React.useState<boolean>(false);
     const [name, setName] = React.useState<string>('');
-    const [description, setDescription] = React.useState<string>('');
     const router = useRouter();
 
     const handleAddClick = (type: string) => {
@@ -15,10 +14,9 @@ export default function CreateTeamButton({ createTeam }: { createTeam: any }) {
     };
 
     const handleSubmit = async () => {
-        await createTeam(name, description);
+        await createTeam(name);
         setShowModal(false);
         setName('');
-        setDescription('');
         router.refresh();
     };
 
@@ -40,12 +38,6 @@ export default function CreateTeamButton({ createTeam }: { createTeam: any }) {
                             className="w-full mb-4 px-4 py-2 border rounded-md"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                        />
-                        <textarea
-                            placeholder="Description"
-                            className="w-full mb-4 px-4 py-2 border rounded-md"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
                         />
                         <div className="flex justify-end">
                             <button

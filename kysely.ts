@@ -30,7 +30,7 @@ export interface TeamsTable {
   name: string;
   description: string;
   hackathon_id: number;
-  submitted_at: Date;
+  submitted_at?: Date;
   wallet_address: string;
   embeds: Json;
 }

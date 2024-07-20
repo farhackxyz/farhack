@@ -61,7 +61,7 @@ export default async function YourTeamPage() {
             .execute();
     }
 
-    async function createTeam(name: string, description: string) {
+    async function createTeam(name: string, description: string = '') {
         'use server';
         const emptyJsonArray = JSON.stringify([]);
         await db.insertInto('teams').values({
@@ -69,7 +69,6 @@ export default async function YourTeamPage() {
             description: description,
             hackathon_id: hackathon?.id ?? 0,
             fids: [user?.id ?? 0],
-            submitted_at: new Date(),
             wallet_address: '',
             embeds: sql`${emptyJsonArray}::jsonb`
         }).execute();

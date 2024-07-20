@@ -3,17 +3,41 @@ import './globals.css'
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { auth } from '../auth';
-import { images, karla } from "./lib/utils";
+import { karla } from "./lib/utils";
 import FarhackLogo from "./components/icons/farhack-logo";
 import SignInWithFarcaster from "./components/sign-in-with-farcaster";
+import Head from 'next/head';
 
-export const metadata: Metadata = {
-  title: "FarHack",
-  description: "The ultimate Farcaster hackathon",
-  openGraph: {
-    images: images.map((image: { src: string, alt: string }) => image.src)
-  }
-};
+export function generateMetadata(){
+  return{
+    metadataBase: new URL('https://farhack.xyz'),
+    title: {
+      default: 'FarHack',
+      template: '%s | FarHack',
+    },
+    description: 'The ultimate Farcaster hackathon',
+    openGraph: {
+      title: 'FarHack',
+      description: 'The ultimate Farcaster hackathon',
+      images: ['https://i.imgur.com/4bFngii.png', 'https://i.imgur.com/IzrcL7A.jpeg'],
+      url: 'https://farhack.xyz',
+      siteName: 'FarHack',
+      locale: 'en_US',
+      type: 'website',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  } as Metadata
+}
 
 export default async function RootLayout({
   children,
@@ -31,6 +55,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
       <body className={`${karla.className} dark bg-black`}>
         <SessionProvider basePath={"/api/auth"} session={session}>
           <div className="flex flex-col gap-4 min-h-screen">

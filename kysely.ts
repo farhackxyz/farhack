@@ -23,6 +23,15 @@ export interface UserTable {
   is_admin: boolean;
 }
 
+export interface TeamsTable {
+  id: Generated<number>;
+  fids: number[];
+  name: string;
+  description: string;
+  hackathon_id: number;
+  submitted_at: Date;
+}
+
 export interface HackathonsTable {
   id: Generated<number>;
   name: string;
@@ -40,6 +49,7 @@ export interface HackathonsTable {
 
 export interface Database {
   users: UserTable;
+  teams: TeamsTable;
   hackathons: HackathonsTable;
 }
 

@@ -50,5 +50,7 @@ export interface SessionUser {
     fids: number[];
     name: string;
     description: string;
-    submitted_at: Date | null;
-  }  
+    hackathon_id: number;
+    submitted_at: Date;
+  }
+  

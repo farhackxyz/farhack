@@ -2,6 +2,7 @@
 import React from 'react';
 import { db } from '@/kysely';
 import { headers } from 'next/headers';
+import HackathonNav from '@/app/components/hackathon-nav';
 
 export default async function HackathonBySlugPage() {
     const headerList = headers();
@@ -27,18 +28,24 @@ export default async function HackathonBySlugPage() {
 
     return (
         <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pt-5 pl-[3%]">
-                <div className="flex flex-row gap-4 items-center mt-[3.5%]">
-                    <img src={hackathon.square_image} alt={`${hackathon?.name} Hackathon`} loading="lazy" className="rounded w-[4%]" />
-                    <p className="text-2xl font-medium">{hackathon?.name ? `${hackathon.name} Hackathon` : 'this hackathon'}</p>
-                </div>
-                <div className="w-[98%] border border-1 border-white rounded-md p-5 mt-5 flex flex-col items-center">
-                    <p className="font-medium"><span className="font-semibold text-lg">Create</span> or join a team to get started!</p>
-                </div>
-                <div className="pt-10 flex flex-col gap-2 items-start">
-                    <p className="text-3xl font-medium">Schedule</p>
-                    <div className="text-lg">
-                        <p>Dates: {startDate} - {endDate}</p>
+            <div className="text-white flex flex-col gap-1 items-start pl-[4.5%]">
+                <HackathonNav hackathon={hackathon} />
+                <div className="flex flex-row flex-wrap md:flex-nowrap justify-between w-full mt-8 ml-1 mr-1">
+                    <div className="flex flex-col md:w-1/2 gap-2">
+                        <img src={hackathon.square_image} alt={`${hackathon?.name} Hackathon`} loading="lazy" className="rounded-lg w-[75%]" />
+                    </div>
+                    <div className="flex flex-col mt-7 md:mt-0 mb-10 md:mb-0 md:w-1/2 gap-2 mr-[15%]">
+                        <div className="flex flex-col gap-1 items-start">
+                            <p className="text-4xl font-medium">
+                                {hackathon.name}
+                            </p>
+                            <p>
+                                {startDate} - {endDate}
+                            </p>
+                        </div>
+                        <p className="mt-2 text-xl font-normal text-white/95">
+                            {hackathon.description}
+                        </p>
                     </div>
                 </div>
             </div>

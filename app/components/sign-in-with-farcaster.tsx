@@ -71,7 +71,7 @@ function Content() {
               <p>{session.user?.name}</p>
             </a>
             <div className="flex flex-row gap-2 items-center bg-red-500 text-white border-1 rounded-full px-2 py-2 pl-3 pr-3 cursor-pointer" onClick={() => signOut()}>
-              <p className="font-medium">Sign out</p>
+              <p className="font-medium">Logout</p>
             </div>
           </div>
           <div className="text-white pt-2 flex flex-col items-center md:hidden">
@@ -81,7 +81,7 @@ function Content() {
             </button>
             {dropdownOpen && (
               <div className="absolute top-12 right-0 rounded-full shadow-lg bg-red-500 text-white mt-2">
-                <button onClick={() => signOut()} className="w-full text-left px-4 py-2">Sign out</button>
+                <button onClick={() => signOut()} className="w-full text-left px-4 py-2">Logout</button>
               </div>
             )}
           </div>

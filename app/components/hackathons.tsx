@@ -13,17 +13,37 @@ interface Hackathon {
 }
 
 function HackathonListItem({ hackathon }: { hackathon: Hackathon }) {
+  const now = new Date();
+  const isLive = now >= new Date(hackathon.start_date) && now <= new Date(hackathon.end_date);
+  const dateLabel = isLive ? (
+    <span className="flex items-center rounded-xl bg-white px-2.5 text-black">
+      <span className="w-2.5 h-2.5 bg-red-600 rounded-full mr-1.5"></span>
+      Live
+    </span>
+  ) : (
+    <span className="rounded-xl bg-white px-2.5 text-black">
+      {hackathon.start_date.toLocaleString('default', { month: 'long', year: 'numeric' })}
+    </span>
+  );
+
   return (
     <div className="m-auto relative">
       <a href={`/hackathons/${hackathon.slug}`}>
         <div className="flex flex-col gap-2 items-center max-w-[300px] w-full">
-          <img
-            src={hackathon.square_image}
-            alt={hackathon.name}
-            loading="lazy"
-            className="rounded max-w-[100%]"
-          />
-          <p className="text-white p-2 w-full text-center">{hackathon.name}</p>
+          <div className="flex justify-between w-full">
+            {dateLabel}
+          </div>
+          <div className="relative">
+            <img
+              src={hackathon.square_image}
+              alt={hackathon.name}
+              loading="lazy"
+              className="rounded-xl max-w-[100%]"
+            />
+            <div className="absolute bottom-0 w-full bg-gray-800 bg-opacity-50 p-2 text-center text-white">
+              {hackathon.name}
+            </div>
+          </div>
         </div>
       </a>
     </div>
@@ -33,33 +53,26 @@ function HackathonListItem({ hackathon }: { hackathon: Hackathon }) {
 export default async function Hackathons() {
   const hackathons: Hackathon[] = await db.selectFrom("hackathons").selectAll().execute();
   if (hackathons) {
-    const currentDate = new Date();
-    const upcomingHackathons = hackathons.filter(hackathon => new Date(hackathon.start_date) > currentDate);
-    const previousHackathons = hackathons.filter(hackathon => new Date(hackathon.end_date) < currentDate);
+    hackathons.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
 
     return (
-      <div
-        className={`text-white flex flex-col gap-1 items-start mt-[15%] sm:mt-[13%] md:mt-[6.5%] ml-[1.5%] p-4`}
-      >
-        <p className="text-2xl md:text-3xl font-semibold">Hackathons</p>
-        <div className="pt-5">
-          <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            <div>
-              <p className="text-lg md:text-xl font-medium pb-2">Upcoming</p>
-              <div className="grid gap-10 grid-cols-1">
-                {upcomingHackathons.map((hackathon: Hackathon) => (
-                  <HackathonListItem key={hackathon.id} hackathon={hackathon} />
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="text-lg md:text-xl font-medium pb-2">Previous</p>
-              <div className="grid gap-10 grid-cols-1">
-                {previousHackathons.map((hackathon: Hackathon) => (
-                  <HackathonListItem key={hackathon.id} hackathon={hackathon} />
-                ))}
-              </div>
-            </div>
+      <div className={`text-white flex flex-col gap-1 items-center mt-[12%] sm:mt-[10%] md:mt-[4%] p-4`}>
+        <span
+          className="text-[5vw] md:text-[3vw] lg:text-[67.1653px] leading-[79px] text-center font-karla font-bold"
+          style={{
+            WebkitTextFillColor: 'black',
+            WebkitTextStrokeWidth: '1.5px',
+            WebkitTextStrokeColor: '#8A63D2',
+            textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+          }}
+        >
+          The ultimate Farcaster hackathon
+        </span>
+        <div className="pt-10">
+          <div className="flex flex-wrap justify-center items-center gap-10">
+            {hackathons.map((hackathon) => (
+              <HackathonListItem key={hackathon.id} hackathon={hackathon} />
+            ))}
           </div>
         </div>
       </div>

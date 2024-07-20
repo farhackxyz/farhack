@@ -75,13 +75,13 @@ function Content() {
             </div>
           </div>
           <div className="text-white pt-2 flex flex-col items-center md:hidden">
-            <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex flex-row gap-2 items-center border border-white border-1 rounded-md px-2.5 py-1">
+            <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex flex-row gap-2 items-center bg-fcPurple text-white border-1 rounded-full px-2 py-1 pl-2 pr-2 cursor-pointer">
               <img src={session.user?.image ?? ""} alt="User Image" className="w-8 h-8 rounded-full" />
               <p>{session.user?.name}</p>
             </button>
             {dropdownOpen && (
-              <div className="absolute top-12 right-0 bg-black border border-white rounded-md shadow-lg py-2 mt-2">
-                <button onClick={() => signOut()} className="w-full text-left px-4 py-2 text-red-500">Sign out</button>
+              <div className="absolute top-12 right-0 rounded-full shadow-lg bg-red-500 text-white mt-2">
+                <button onClick={() => signOut()} className="w-full text-left px-4 py-2">Sign out</button>
               </div>
             )}
           </div>

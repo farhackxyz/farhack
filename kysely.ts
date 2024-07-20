@@ -1,5 +1,6 @@
-import { Kysely, PostgresDialect, sql, Generated, ColumnType  } from 'kysely';
+import { Kysely, PostgresDialect, sql, Generated, ColumnType } from 'kysely';
 import { Pool } from 'pg';
+import { v4 as uuidv4 } from 'uuid';
 
 export type Json = JsonValue;
 
@@ -41,16 +42,25 @@ export interface HackathonsTable {
   start_date: Date;
   end_date: Date;
   created_at: Generated<Date>;
-  // TODO: find a better way to represent JSONB columns in kysely
   tracks: Json;
   bounties: Json;
   schedule: Json;
+}
+
+export interface InvitesTable {
+  id: Generated<number>;
+  token: string;
+  created_at: Generated<Date>;
+  expires_at: Date;
+  user_id: number;
+  accepted_at?: Date;
 }
 
 export interface Database {
   users: UserTable;
   teams: TeamsTable;
   hackathons: HackathonsTable;
+  invites: InvitesTable;
 }
 
 const connectionString = process.env.DATABASE_URL ?? "";
@@ -101,6 +111,45 @@ export const addItem = async (
       .where('id', '=', hackathonId)
       .execute();
   }
+};
+
+export const createInvite = async (userId: number): Promise<string> => {
+  if (!userId) {
+    throw new Error('User ID is required');
+  }
+
+  const token = uuidv4();
+  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+
+  await db.insertInto('invites').values({
+    token,
+    expires_at: expiresAt,
+    user_id: userId
+  }).execute();
+
+  return token;
+};
+
+export const acceptInvite = async (token: string, userId: number): Promise<void> => {
+  if (!token || !userId) {
+    throw new Error('Token and user ID are required');
+  }
+
+  const invite = await db.selectFrom('invites')
+    .selectAll()
+    .where('token', '=', token)
+    .where('expires_at', '>', new Date())
+    .where('accepted_at', 'is', null)
+    .executeTakeFirst();
+
+  if (!invite) {
+    throw new Error('Invalid or expired invite');
+  }
+
+  await db.updateTable('invites')
+    .set({ accepted_at: new Date() })
+    .where('id', '=', invite.id)
+    .execute();
 };
 
 export { sql } from 'kysely';

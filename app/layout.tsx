@@ -19,7 +19,7 @@ export function generateMetadata(){
     openGraph: {
       title: 'FarHack',
       description: 'The ultimate Farcaster hackathon',
-      images: ['https://i.imgur.com/4bFngii.png', 'https://i.imgur.com/IzrcL7A.jpeg'],
+      images: ['https://i.imgur.com/4sLMVg2.png'],
       url: 'https://farhack.xyz',
       siteName: 'FarHack',
       locale: 'en_US',

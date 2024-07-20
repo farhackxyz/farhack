@@ -30,7 +30,7 @@ export default async function ProfileByUsernamePage() {
       };
 
       return (
-        <div className="flex flex-col gap-2 items-start mt-10">
+        <div className="flex flex-col gap-2 items-start mt-10 p-6">
             <div className="flex flex-row gap-2 items-center">
                 <img src={session.user.image || ''} alt={`${session.user.name}&apos;s avatar`} className="w-10 h-10 rounded" />
                 <p className="text-2xl font-medium pr-3">@{session.user.name}</p>

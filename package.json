@@ -22,6 +22,7 @@
     "react": "^18",
     "react-dom": "^18",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0",
     "viem": "^2.17.4"
   },
   "devDependencies": {
@@ -29,6 +30,7 @@
     "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^10.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

@@ -11,8 +11,8 @@ import { usePathname } from "next/navigation";
 const config = {
   relay: "https://relay.farcaster.xyz",
   rpcUrl: "https://mainnet.optimism.io",
-  siweUri: "http://example.com/login",
-  domain: "example.com",
+  siweUri: "https://farhack.xyz",
+  domain: "farhack.xyz",
 };
 
 export default function SignInWithFarcaster() {

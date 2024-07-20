@@ -3,74 +3,10 @@ import React from 'react';
 import FarhackLogo from '../../components/icons/farhack-logo';
 import { karla } from '../../lib/utils';
 
-type Hackathon = {
-  name: string;
-  status: string;
-  image: string;
-  link: string;
-};
-
-const hackathons: Hackathon[] = [
-  {
-    name: "EdCon",
-    status: "upcoming",
-    image: "https://i.imgur.com/UrNV4yL.png",
-    link: "https://example.com/edcon"
-  },
-  {
-    name: "FarHack at FarCon",
-    status: "previous",
-    image: "https://i.imgur.com/m2qIvVE.png",
-    link: "https://farhack.xyz"
-  }
-];
-
 const splitIntoTwoColumns = (images: { src: string; alt: string }[]) => {
   const half = Math.ceil(images.length / 2);
   return [images.slice(0, half), images.slice(half)];
 };
-
-function HackathonListItem({ hackathon }: { hackathon: Hackathon }) {
-  const typeFiltered = hackathons.filter(h => h.status === hackathon.status);
-  const indexInType = typeFiltered.findIndex(h => h.name === hackathon.name);
-
-  return (
-    <div className="m-auto relative">
-      <a href={hackathon.link} target="_blank" rel="noopener noreferrer">
-        {indexInType === 0 &&
-          <div className="mb-2 min-w-[100%]">
-            <p className="text-left text-white">
-              {hackathon.status.charAt(0).toUpperCase() + hackathon.status.slice(1)}
-            </p>
-          </div>
-        }
-        <div className="flex flex-col gap-2 items-center max-w-[300px] w-full">
-          <img
-            src={hackathon.image}
-            alt={hackathon.name}
-            loading="lazy"
-            className={`rounded max-w-[100%] ${indexInType !== 0 ? "mt-7" : ""}`}
-          />
-          <p className="text-white p-2 w-full text-center">
-            {hackathon.name}
-          </p>
-        </div>
-      </a>
-    </div>
-  );
-}
-
-function HackathonList() {
-  return (
-    <div className="pt-5">
-      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {hackathons.map((hackathon) => {
-          return <HackathonListItem key={hackathon.name} hackathon={hackathon} />;
-        })}
-      </div>
-    </div>
-  );
-}
 
 const Nav = () => {
   return (

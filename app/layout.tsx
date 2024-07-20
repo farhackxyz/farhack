@@ -7,6 +7,7 @@ import { karla } from "./lib/utils";
 import FarhackLogo from "./components/icons/farhack-logo";
 import SignInWithFarcaster from "./components/sign-in-with-farcaster";
 import Head from 'next/head';
+import Script from 'next/script';
 
 export function generateMetadata(){
   return{
@@ -58,6 +59,20 @@ export default async function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
+      />
+      <Script strategy="lazyOnload" id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
+          page_path: window.location.pathname,
+          });
+        `}
+      </Script>
       <body className={`${karla.className} dark bg-black`}>
         <SessionProvider basePath={"/api/auth"} session={session}>
           <div className="flex flex-col gap-4 min-h-screen">

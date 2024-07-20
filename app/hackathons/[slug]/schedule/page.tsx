@@ -30,12 +30,12 @@ export default async function HackathonSchedulePage() {
 
     return (
         <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pl-[4.5%]">
+            <div className="text-white flex flex-col gap-1 items-start pl-[7.5%] md:pl-[4.5%]">
                 <HackathonNav hackathon={hackathon} />
                 {schedule ?
                 <>
                     <p className="text-2xl font-semibold mt-5 mb-3">Schedule</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full pr-[4.5%]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full pr-[6.5%] md:pr-[4.5%]">
                         {schedule.map((item: ScheduleItem) => {
                             return (
                                 <a key={item.id} className="flex flex-col justify-between gap-1 items-start p-4 rounded-md bg-gray-600 text-white hover:bg-gray-500 transition-colors duration-200" href={item.url}>

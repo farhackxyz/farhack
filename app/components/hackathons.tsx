@@ -56,9 +56,9 @@ export default async function Hackathons() {
     hackathons.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
 
     return (
-      <div className={`text-white flex flex-col gap-1 items-center mt-[12%] sm:mt-[10%] md:mt-[4%] p-4`}>
+      <div className={`text-white flex flex-col gap-1 items-center mt-[17%] sm:mt-[12%] md:mt-[7%] p-4`}>
         <span
-          className="text-[5vw] md:text-[3vw] lg:text-[67.1653px] leading-[79px] text-center font-karla font-bold"
+          className="text-[8vw] md:text-[6vw] lg:text-[67.1653px] leading-[79px] text-center font-karla font-bold"
           style={{
             WebkitTextFillColor: 'black',
             WebkitTextStrokeWidth: '1.5px',
@@ -68,7 +68,7 @@ export default async function Hackathons() {
         >
           The ultimate Farcaster hackathon
         </span>
-        <div className="pt-10">
+        <div className="pt-5 md:pt-10">
           <div className="flex flex-wrap justify-center items-center gap-10">
             {hackathons.map((hackathon) => (
               <HackathonListItem key={hackathon.id} hackathon={hackathon} />

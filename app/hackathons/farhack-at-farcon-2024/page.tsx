@@ -11,7 +11,7 @@ const splitIntoTwoColumns = (images: { src: string; alt: string }[]) => {
 const Nav = () => {
   return (
     <nav className="w-full h-16 flex items-center justify-between">
-      <ul className="w-full flex flex-row gap-1 justify-between items-center mr-[10%]">
+      <ul className="w-full flex flex-row gap-1 justify-between items-center mr-[10%] mb-4">
         <div></div>
         <div className="flex flex-row gap-4 items-center">
           <a

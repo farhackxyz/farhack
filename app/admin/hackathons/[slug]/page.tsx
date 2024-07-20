@@ -118,31 +118,28 @@ export default async function HackathonBySlugPage() {
     const bounties = hackathon.bounties as unknown as Bounty[];
 
     return (
-        <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pt-5 pl-[3%]">
+        <div className="pt-5 px-4">
+            <div className="text-white flex flex-col gap-1 items-start pt-5 p-4">
                 <a href="/admin" className="pt-10 font-medium text-lg">
                     <p>
                         {`<- Back to Admin Panel`}
                     </p>
                 </a>
-                <div className="flex flex-row gap-4 items-center mt-[1.5%]">
+                <div className="flex flex-row gap-4 items-center mt-[1.5%] mb-[2%]">
                     <img src={hackathon.square_image} alt={`${hackathon?.name} Hackathon`} loading="lazy" className="rounded w-[4%]" />
                     <p className="text-2xl font-medium">{hackathon?.name ? `${hackathon.name} Hackathon` : 'this hackathon'}</p>
                 </div>
-                <div className="w-[98%] border border-1 border-white rounded-md p-5 mt-5 flex flex-col items-center">
-                    <p className="font-medium"><span className="font-semibold text-lg">Create</span> or join a team to get started!</p>
-                </div>
                 <AddItemButton hackathonId={hackathon.id} addItem={addItem} />
-                <div className="pt-10 flex flex-col gap-2 items-start">
+                <div className="pt-10 flex flex-col gap-2 items-start w-full">
                     <p className="text-3xl font-medium">Schedule</p>
-                    <div className="text-lg">
+                    <div className="text-lg w-full">
                         <p>Dates: {startDate} - {endDate}</p>
                         {schedule ? (
-                            <ul>
+                            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                                 {schedule.map((item, index) => (
-                                    <li key={index} className="flex justify-between">
+                                    <li key={index} className="flex justify-between p-4 bg-gray-800 rounded-md">
                                         <a href={item.url} target="_blank" rel="noreferrer" className="underline">
-                                            <p>{item.name}: {new Date(item.date).toLocaleDateString()}</p>
+                                            <p>{item.name}: {new Date(item.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</p>
                                         </a>
                                         <RemoveItemButton hackathonId={hackathon.id} modalType="ScheduleItem" itemId={item.id} removeItem={removeItem} />
                                     </li>
@@ -153,12 +150,12 @@ export default async function HackathonBySlugPage() {
                         )}
                     </div>
                 </div>
-                <div className="pt-10 flex flex-col gap-2 items-start">
+                <div className="pt-10 flex flex-col gap-2 items-start w-full">
                     <p className="text-3xl font-medium">Tracks</p>
                     {tracks ? (
-                        <ul>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                             {tracks.map((track, index) => (
-                                <li key={index} className="flex justify-between">
+                                <li key={index} className="flex justify-between p-4 bg-gray-800 rounded-md">
                                     <p>{track.name}: {track.description}</p>
                                     <RemoveItemButton hackathonId={hackathon.id} modalType="Track" itemId={track.id} removeItem={removeItem} />
                                 </li>
@@ -168,12 +165,12 @@ export default async function HackathonBySlugPage() {
                         <p>No tracks available.</p>
                     )}
                 </div>
-                <div className="pt-10 flex flex-col gap-2 items-start">
+                <div className="pt-10 flex flex-col gap-2 items-start w-full">
                     <p className="text-3xl font-medium">Bounties</p>
                     {bounties ? (
-                        <ul>
+                        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                             {bounties.map((bounty, index) => (
-                                <li key={index} className="flex justify-between">
+                                <li key={index} className="flex justify-between p-4 bg-gray-800 rounded-md">
                                     <p>{bounty.name}: {bounty.description}</p>
                                     <RemoveItemButton hackathonId={hackathon.id} modalType="Bounty" itemId={bounty.id} removeItem={removeItem} />
                                 </li>

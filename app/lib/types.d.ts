@@ -53,4 +53,19 @@ export interface SessionUser {
     hackathon_id: number;
     submitted_at: Date;
   }
+
+  export interface Invite {
+    id: number;
+    token: string;
+    created_at: Date;
+    expires_at: Date;
+    user_id: number;
+    accepted_at?: Date;
+    accepted_by: number;
+    team_id: number;
+  }
+
+  export type State = {
+    count: number;
+  };
   

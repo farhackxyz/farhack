@@ -19,14 +19,14 @@ const hackathonPages = [
         name: 'Schedule',
         slug: '/schedule'
     },
-    // {
-    //     name: 'Teams',
-    //     slug: '/teams'
-    // },
-    // {
-    //     name: 'Your team',
-    //     slug: '/your-team'
-    // }
+    {
+        name: 'Teams',
+        slug: '/teams'
+    },
+    {
+        name: 'Your team',
+        slug: '/your-team'
+    }
 ]
 
 function HackthonNavItem({ name, slug }: { name: string, slug: string }) {

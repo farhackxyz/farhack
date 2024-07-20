@@ -7,6 +7,7 @@ import { auth } from '@/auth';
 export default async function AcceptInvitePage() {
     const headerList = headers();
     const pathname = headerList.get("x-current-path") as string;
+    const hackathonSlug = pathname.split('/')[2];
     const query = headerList.get("x-current-query") as string;
 
     const token = query.replace('token=', '');
@@ -22,18 +23,26 @@ export default async function AcceptInvitePage() {
         );
     }
 
-    const processInvite = async () => {
-        try {
-            if (token && session?.user) {
-                await acceptInvite(token, user.id);
-                return <p className="p-15">Invite accepted!</p>;
-            }
-        } catch (error) {
-            return <p className="p-15">Failed: {(error as unknown as Error).message}</p>
+    let inviteStatus = 'pending';
+
+    try {
+        if (token && session?.user) {
+            await acceptInvite(token, user.id);
+            inviteStatus = 'accepted';
         }
-    };
+    } catch (error) {
+        inviteStatus = 'failed';
+    }
 
-    await processInvite();
-
-    return <p className="p-15">Failed to process invite</p>;
+    return (
+        <div className="flex items-center justify-center min-h-screen text-white text-2xl">
+            {inviteStatus === 'accepted' ? (
+                <p className="p-15">Invite accepted! <a href={`/hackathons/${hackathonSlug}/your-team`} className="underline">Click here to view team</a></p>
+            ) : inviteStatus === 'failed' ? (
+                <p className="p-15">Failed: Unable to process invite</p>
+            ) : (
+                <p className="p-15">Processing invite...</p>
+            )}
+        </div>
+    );
 }

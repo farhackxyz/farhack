@@ -54,6 +54,8 @@ export interface InvitesTable {
   expires_at: Date;
   user_id: number;
   accepted_at?: Date;
+  accepted_by?: number;
+  team_id?: number;
 }
 
 export interface Database {
@@ -113,18 +115,19 @@ export const addItem = async (
   }
 };
 
-export const createInvite = async (userId: number): Promise<string> => {
-  if (!userId) {
-    throw new Error('User ID is required');
+export const createInvite = async (userId: number, teamId: number): Promise<string> => {
+  if (!userId || !teamId) {
+    throw new Error('User ID and Team ID are required');
   }
 
   const token = uuidv4();
-  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+  const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
 
   await db.insertInto('invites').values({
     token,
     expires_at: expiresAt,
-    user_id: userId
+    user_id: userId,
+    team_id: teamId
   }).execute();
 
   return token;
@@ -146,11 +149,23 @@ export const acceptInvite = async (token: string, userId: number): Promise<void>
     throw new Error('Invalid or expired invite');
   }
 
-  await db.updateTable('invites')
-    .set({ accepted_at: new Date() })
-    .where('id', '=', invite.id)
-    .execute();
-  console.log("INVITE ACCEPTED", invite);
+  if (invite.team_id === undefined) {
+    throw new Error('Invite does not have a valid team_id');
+  }
+
+  await db.transaction().execute(async (trx) => {
+    await trx.updateTable('invites')
+      .set({ accepted_at: new Date(), accepted_by: userId })
+      .where('id', '=', invite.id)
+      .execute();
+
+    await trx.updateTable('teams')
+      .set({
+        fids: sql`array_append(fids, ${userId})`
+      })
+      .where('id', '=', (invite.team_id as unknown as number))
+      .execute();
+  });
 };
 
 export { sql } from 'kysely';

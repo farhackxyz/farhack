@@ -12,7 +12,7 @@ export default async function AcceptInvitePage() {
     const token = query.replace('token=', '');
     const session = await auth();
 
-    const user = await db.selectFrom('users').selectAll().where('name', '=', session.user.name ?? "").executeTakeFirst();
+    const user = await db.selectFrom('users').selectAll().where('name', '=', session?.user?.name ?? "").executeTakeFirst();
 
     if (!user) {
         return (

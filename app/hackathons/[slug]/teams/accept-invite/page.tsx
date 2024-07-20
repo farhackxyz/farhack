@@ -7,23 +7,33 @@ import { auth } from '@/auth';
 export default async function AcceptInvitePage() {
     const headerList = headers();
     const pathname = headerList.get("x-current-path") as string;
-    const urlParams = new URLSearchParams(pathname.split('?')[1]);
-    const token = urlParams.get('token');
+    const query = headerList.get("x-current-query") as string;
+
+    const token = query.replace('token=', '');
     const session = await auth();
+
+    const user = await db.selectFrom('users').selectAll().where('name', '=', session.user.name ?? "").executeTakeFirst();
+
+    if (!user) {
+        return (
+            <div className="flex items-center justify-center min-h-screen text-white text-2xl">
+                <p>You are not logged in. Log in above or <a href="/" className="underline">click here to return home</a></p>
+            </div>
+        );
+    }
 
     const processInvite = async () => {
         try {
             if (token && session?.user) {
-                await acceptInvite(token, parseInt(session.user.id ?? ""));
-                alert('Invite accepted! Redirecting to your team page...');
-                window.location.replace('/your-team');
+                await acceptInvite(token, user.id);
+                return <p className="p-15">Invite accepted!</p>;
             }
         } catch (error) {
-            alert('Failed to accept invite: ' + (error as unknown as Error).message);
+            return <p className="p-15">Failed: {(error as unknown as Error).message}</p>
         }
     };
 
-    processInvite();
+    await processInvite();
 
-    return <p>Processing invite...</p>;
+    return <p className="p-15">Failed to process invite</p>;
 }

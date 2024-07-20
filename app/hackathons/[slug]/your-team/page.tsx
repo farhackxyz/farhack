@@ -5,6 +5,8 @@ import { db, sql, createInvite } from '@/kysely';
 import { auth } from '@/auth';
 import HackathonNav from '@/app/components/hackathon-nav';
 import InviteButton from '@/app/components/invite-button';
+import CreateTeamButton from '@/app/components/create-team-button';
+import { redirect } from 'next/navigation';
 
 export default async function YourTeamPage() {
     const headerList = headers();
@@ -49,13 +51,23 @@ export default async function YourTeamPage() {
         .where(sql<boolean>`fids @> ARRAY[${user.id}]::int[]`)
         .executeTakeFirst();
 
+    async function createTeam(name: string, description: string) {
+        'use server';
+        const newTeam = await db.insertInto('teams').values({
+            name: name,
+            description: description,
+            hackathon_id: hackathon?.id ?? 0,
+            fids: [user?.id ?? 0]
+        } as unknown as any).execute();
+        return;
+    }
+
     async function handleGenerateInvite(): Promise<string> {
         'use server';
         const token = await createInvite(user?.id ?? 0);
         const base = 'http://localhost:3000';
-        const inviteLink = `${base}/accept-invite?token=${token}`;
-        console.log("invite link", inviteLink);
-        return inviteLink;
+        const shareLink = `${base}/hackathons/${hackathon?.slug}/teams/share-invite?token=${token}`;
+        redirect(shareLink);
     }
 
     return (
@@ -65,15 +77,16 @@ export default async function YourTeamPage() {
                 {team ? (
                     <>
                         <p className="text-2xl font-semibold mt-5 mb-3">Your Team</p>
-                        <div className="p-4 rounded-md bg-gray-600 text-white transition-colors duration-200">
+                        <div className="p-4 rounded-md bg-gray-600 text-white transition-colors duration-200 mb-3">
                             <p className="font-semibold">{team.name}</p>
                             <p className="text-sm">{team.description}</p>
                         </div>
+                        <InviteButton handleGenerateInvite={handleGenerateInvite} />
                     </>
                 ) : (
                     <div className="text-white flex flex-col gap-1 items-start">
                         <p className="text-2xl font-semibold mt-5 mb-3">You are not part of any team</p>
-                        <InviteButton handleGenerateInvite={handleGenerateInvite} />
+                        <CreateTeamButton createTeam={createTeam} />
                     </div>
                 )}
             </div>

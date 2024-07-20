@@ -150,6 +150,7 @@ export const acceptInvite = async (token: string, userId: number): Promise<void>
     .set({ accepted_at: new Date() })
     .where('id', '=', invite.id)
     .execute();
+  console.log("INVITE ACCEPTED", invite);
 };
 
 export { sql } from 'kysely';

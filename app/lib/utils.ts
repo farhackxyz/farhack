@@ -10,7 +10,10 @@ export const karla = Karla({
   display: 'swap'
 });
 
-export const BASE_URL = 'http://localhost:3000';
-// export const BASE_URL = 'https://farhack.xyz';
+const isDev = process.env.NODE_ENV === 'development';
+
+export const BASE_URL = isDev 
+  ? 'http://localhost:3000' 
+  : process.env.VERCEL_URL || 'https://farhack.xyz';
 
 export const BANNER_IMG = 'https://i.imgur.com/4sLMVg2.png';

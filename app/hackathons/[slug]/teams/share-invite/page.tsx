@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { db, sql } from '@/kysely';
 import { auth } from '@/auth';
 import CopyClipboardIcon from '@/app/components/copy-to-clipboard';
+import { BASE_URL } from '@/app/lib/utils';
 
 export default async function ShareInvitePage() {
     const headerList = headers();
@@ -12,7 +13,6 @@ export default async function ShareInvitePage() {
 
     const token = query.replace('token=', '');
     const session = await auth();
-    const basePath = 'http://localhost:3000';
     const hackathonSlug = pathname.split('/')[2];
 
     const user = await db.selectFrom('users').selectAll().where('name', '=', session?.user?.name ?? "").executeTakeFirst();
@@ -38,7 +38,7 @@ export default async function ShareInvitePage() {
         );
     }
 
-    const acceptLink = `${basePath}/hackathons/${hackathonSlug}/teams/accept-invite?token=${token}`;
+    const acceptLink = `${BASE_URL}/hackathons/${hackathonSlug}/teams/accept-invite?token=${token}`;
 
     return (
         <div className="flex flex-col gap-1 items-center justify-center min-h-screen text-white text-2xl">

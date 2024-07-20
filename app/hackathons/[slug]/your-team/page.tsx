@@ -9,6 +9,7 @@ import CreateTeamButton from '@/app/components/create-team-button';
 import DeleteOrLeaveTeamButton from '@/app/components/delete-or-leave-team-button';
 import EditOrSubmitTeamButton from '@/app/components/edit-or-submit-team-button';
 import { redirect } from 'next/navigation';
+import { BASE_URL } from '@/app/lib/utils';
 
 export default async function YourTeamPage() {
     const headerList = headers();
@@ -77,8 +78,7 @@ export default async function YourTeamPage() {
     async function handleGenerateInvite(): Promise<string> {
         'use server';
         const token = await createInvite(user?.id ?? 0, team?.id ?? 0);
-        const base = 'http://localhost:3000';
-        const shareLink = `${base}/hackathons/${hackathon?.slug}/teams/share-invite?token=${token}`;
+        const shareLink = `${BASE_URL}/hackathons/${hackathon?.slug}/teams/share-invite?token=${token}`;
         redirect(shareLink);
     }
 

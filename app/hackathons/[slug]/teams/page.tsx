@@ -16,12 +16,20 @@ export default async function HackathonBounitesPage() {
         .where('slug', '=', slug)
         .executeTakeFirst();
 
+    if (!hackathon) {
+        return (
+            <div className="flex items-center justify-center min-h-screen text-white text-2xl">
+                <p>No data found. <a href="/" className="underline">Return to home</a></p>
+            </div>
+        );
+    }
+
     const teams = await db.selectFrom('teams')
         .selectAll()
         .where('hackathon_id', '=', hackathon.id)
-        .executeTakeFirst();
+        .execute();
 
-    if (!hackathon || !teams) {
+    if (!teams) {
         return (
             <div className="flex items-center justify-center min-h-screen text-white text-2xl">
                 <p>No data found. <a href="/" className="underline">Return to home</a></p>

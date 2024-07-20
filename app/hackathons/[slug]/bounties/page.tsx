@@ -40,7 +40,7 @@ export default async function HackathonBounitesPage() {
                             return (
                                 <div key={item.id} className="flex flex-col justify-between gap-1 items-start p-4 rounded-md bg-gray-600 text-white transition-colors duration-200">
                                     <p className="font-semibold">{item.name}</p>
-                                    <p className="text-sm">{item.description}</p>
+                                    <p className="text-sm whitespace-pre-line">{item.description}</p>
                                 </div>
                             );
                         })}

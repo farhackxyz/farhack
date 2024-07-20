@@ -11,9 +11,11 @@ export const karla = Karla({
 });
 
 const isDev = process.env.NODE_ENV === 'development';
+const port = process.env.PORT || 3000;
+const localUrl = `http://localhost:${port}`;
 
 export const BASE_URL = isDev 
-  ? 'http://localhost:3000' 
-  : process.env.VERCEL_URL || 'https://farhack.xyz';
+  ? localUrl 
+  : 'https://farhack.xyz';
 
 export const BANNER_IMG = 'https://i.imgur.com/4sLMVg2.png';

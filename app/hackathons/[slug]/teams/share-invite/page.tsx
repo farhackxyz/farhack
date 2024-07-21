@@ -47,7 +47,7 @@ export default async function ShareInvitePage() {
                 <p>Created share link! Click to copy link</p>
                 <CopyClipboardIcon value={acceptLink} />
             </div>
-            <p className="text-sm">Note: this is a one-time use link</p>
+            <p className="text-sm">Note: this is a one-time use link that is only valid for one hour</p>
         </div>
     );
 }

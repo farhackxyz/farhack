@@ -39,8 +39,7 @@ export default async function ProfileByUsernamePage() {
                 </a>
             </div>
             <div className="mt-5 flex flex-col gap-1">
-                <p className="text-xl">Your hackathons</p>
-                <p className="text-lg">None yet :/ <a href="/" className="text-white underline"> click here to get started!</a></p>
+                <p className="text-lg">Profile page coming soon! <a href="/" className="text-white underline"> click here to get started!</a></p>
             </div>
         </div>
       );

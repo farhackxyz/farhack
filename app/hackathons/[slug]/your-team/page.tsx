@@ -62,6 +62,13 @@ export default async function YourTeamPage() {
             .execute();
     }
 
+    const submissionDeadline = new Date(hackathon.end_date);
+    const now = new Date();
+    const timeRemaining = submissionDeadline.getTime() - now.getTime();
+    const daysRemaining = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    const hoursRemaining = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutesRemaining = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+
     async function createTeam(name: string, description: string = '') {
         'use server';
         const emptyJsonArray = JSON.stringify([]);
@@ -117,34 +124,47 @@ export default async function YourTeamPage() {
 
     return (
         <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pl-[4.5%]">
+            <div className="text-white flex flex-col gap-1 items-start pl-[4.5%] pr-[4.5%]">
                 <HackathonNav hackathon={hackathon} />
-                <p className="text-2xl font-semibold mt-5 mb-3">Your Team</p>
+                <div className="mt-5 mb-3 flex flex-col items-start">
+                    <p className="text-2xl font-semibold">Your Team</p>
+                    <p className="text-lg">Time to submission deadline: {daysRemaining} days, {hoursRemaining} hours, {minutesRemaining} minutes</p>
+                </div>
                 {team ? (
                     <>
-                        <div className="p-4 rounded-md bg-gray-600 text-white transition-colors duration-200 mb-3">
-                            <p className="font-semibold">{team.name}</p>
-                            <p className="text-sm">{team.description}</p>
-                        </div>
-                        <div className="mb-3">
-                            <p className="text-xl font-semibold mb-2">Team Members:</p>
-                            <ul className="list-disc pl-5">
-                                {teamMembers.map((member: any) => (
-                                    <li key={member.id} className="text-sm">{member.name}</li>
-                                ))}
-                            </ul>
+                        <div className="p-4 rounded-md bg-baseGrey text-white transition-colors duration-200 mb-3 w-full max-w-md">
+                            <p className="font-semibold text-lg">{team.name}</p>
+                            <div className="text-sm mt-2">
+                                <p>{team.description}</p>
+                                {(team.embeds as unknown as any[]).length > 0 && (
+                                    <div className="mt-2">
+                                        {(team.embeds as unknown as any[]).map((embed: any, index: any) => embed.type === 'image' && (
+                                            <img key={index} src={embed.url} alt={`embed-${index}`} className="w-full h-32 object-cover rounded-md mb-2" />
+                                        ))}
+                                    </div>
+                                )}
+                                {team.wallet_address && (
+                                    <p className="mt-2">Wallet Address: {team.wallet_address}</p>
+                                )}
+                                <p className="font-semibold mt-3">Team Members:</p>
+                                <ul className="list-disc pl-5">
+                                    {teamMembers.map((member: any) => (
+                                        <li key={member.id} className="text-sm">{member.name}</li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                         {!team.submitted_at && (
-                            <InviteButton handleGenerateInvite={handleGenerateInvite} />
-                        )}
-                        {!team.submitted_at && (
-                            <DeleteOrLeaveTeamButton 
-                                teamId={team.id} 
-                                userId={user.id} 
-                                teamMembers={teamMembers} 
-                                handleDeleteTeam={handleDeleteTeam} 
-                                handleLeaveTeam={handleLeaveTeam} 
-                            />
+                            <div className="flex flex-col md:flex-row gap-2 mb-3 w-full">
+                                <InviteButton handleGenerateInvite={handleGenerateInvite} />
+                                <DeleteOrLeaveTeamButton 
+                                    teamId={team.id} 
+                                    userId={user.id} 
+                                    teamMembers={teamMembers} 
+                                    handleDeleteTeam={handleDeleteTeam} 
+                                    handleLeaveTeam={handleLeaveTeam} 
+                                />
+                            </div>
                         )}
                         {team.submitted_at ? (
                             <p className="text-sm mt-3">Submitted at: {new Date(team.submitted_at).toLocaleString()}</p>

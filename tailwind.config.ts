@@ -55,6 +55,9 @@ const config = {
         fcPurple: {
           DEFAULT: "#8A63D2",
         },
+        baseGrey: {
+          DEFAULT: "#6D6D6D",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

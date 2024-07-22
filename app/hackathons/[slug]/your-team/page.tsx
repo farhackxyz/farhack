@@ -7,9 +7,10 @@ import HackathonNav from '@/app/components/hackathon-nav';
 import InviteButton from '@/app/components/invite-button';
 import CreateTeamButton from '@/app/components/create-team-button';
 import DeleteOrLeaveTeamButton from '@/app/components/delete-or-leave-team-button';
-import EditOrSubmitTeamButton from '@/app/components/edit-or-submit-team-button';
+import EditTeamButton from '@/app/components/edit-team-button';
 import { redirect } from 'next/navigation';
 import { BASE_URL } from '@/app/lib/utils';
+import SubmitTeamButton from '@/app/components/submit-team-button';
 
 export default async function YourTeamPage() {
     const headerList = headers();
@@ -154,9 +155,28 @@ export default async function YourTeamPage() {
                                 </ul>
                             </div>
                         </div>
-                        {!team.submitted_at && (
-                            <div className="flex flex-col md:flex-row gap-2 mb-3 w-full">
+                        <p className="text-2xl">Actions</p>
+                        {!team.submitted_at ? (
+                            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mb-3">
                                 <InviteButton handleGenerateInvite={handleGenerateInvite} />
+                                {team.submitted_at ? (
+                                    <p className="text-sm mt-3">Submitted at: {new Date(team.submitted_at).toLocaleString()}</p>
+                                ) : (
+                                    <>
+                                        <EditTeamButton 
+                                            team={team} 
+                                            hackathonEndDate={hackathon.end_date.toISOString()}
+                                            handleSaveTeam={handleSaveTeam}
+                                            handleSubmitTeam={handleSubmitTeam}
+                                        />
+                                        <SubmitTeamButton 
+                                            team={team} 
+                                            hackathonEndDate={hackathon.end_date.toISOString()}
+                                            handleSaveTeam={handleSaveTeam}
+                                            handleSubmitTeam={handleSubmitTeam}
+                                        />
+                                    </>
+                                )}
                                 <DeleteOrLeaveTeamButton 
                                     teamId={team.id} 
                                     userId={user.id} 
@@ -165,17 +185,7 @@ export default async function YourTeamPage() {
                                     handleLeaveTeam={handleLeaveTeam} 
                                 />
                             </div>
-                        )}
-                        {team.submitted_at ? (
-                            <p className="text-sm mt-3">Submitted at: {new Date(team.submitted_at).toLocaleString()}</p>
-                        ) : (
-                            <EditOrSubmitTeamButton 
-                                team={team} 
-                                hackathonEndDate={hackathon.end_date.toISOString()}
-                                handleSaveTeam={handleSaveTeam}
-                                handleSubmitTeam={handleSubmitTeam}
-                            />
-                        )}
+                        ) : <p>Your team has been submitted! No remaining action items.</p>}
                     </>
                 ) : (
                     <div className="text-white flex flex-col gap-1 items-start">

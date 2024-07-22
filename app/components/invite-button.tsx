@@ -11,7 +11,7 @@ export default function InviteButton({ handleGenerateInvite }: { handleGenerateI
     return (
         <button
             onClick={handleClick}
-            className="bg-gray-600 text-white p-2 rounded-full"
+            className="bg-gray-600 hover:bg-gray-700 text-white text-md rounded-full px-4 py-2 mt-2"
         >
             Create Invite Link
         </button>

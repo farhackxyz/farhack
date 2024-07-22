@@ -90,7 +90,7 @@ export default async function RootLayout({
       </Script>
       <body className={`${karla.className} dark bg-black`}>
         <SessionProvider basePath={"/api/auth"} session={session}>
-          <div className="flex flex-col gap-4 min-h-screen">
+          <div className="flex flex-col gap-4 min-h-screen overflow-x-hidden">
             <a href="/">
               <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
                 <FarhackLogo width={35} height={35} />

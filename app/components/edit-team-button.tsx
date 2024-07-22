@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function EditOrSubmitTeamButton({ team, hackathonEndDate, handleSaveTeam, handleSubmitTeam }: { team: any, hackathonEndDate: string, handleSaveTeam: any, handleSubmitTeam: any }) {
+export default function EditTeamButton({ team, hackathonEndDate, handleSaveTeam, handleSubmitTeam }: { team: any, hackathonEndDate: string, handleSaveTeam: any, handleSubmitTeam: any }) {
     const [showModal, setShowModal] = useState(false);
     const [name, setName] = useState(team.name);
     const [description, setDescription] = useState(team.description);
@@ -16,11 +16,6 @@ export default function EditOrSubmitTeamButton({ team, hackathonEndDate, handleS
 
     const handleSave = async () => {
         await handleSaveTeam(name, description, walletAddress, embeds);
-        setShowModal(false);
-    };
-
-    const handleSubmit = async () => {
-        await handleSubmitTeam(name, description, walletAddress, embeds);
         setShowModal(false);
     };
 
@@ -41,7 +36,7 @@ export default function EditOrSubmitTeamButton({ team, hackathonEndDate, handleS
     return (
         <>
             <button
-                className={`bg-blue-600 text-white rounded-full px-4 py-2 hover:bg-blue-700 mt-3 ${!isBeforeEndDate && 'cursor-not-allowed opacity-50'}`}
+                className={`bg-gray-600 text-white rounded-full px-4 py-2 hover:bg-gray-700 mt-2 ${!isBeforeEndDate && 'cursor-not-allowed opacity-50'}`}
                 onClick={() => isBeforeEndDate && setShowModal(true)}
                 disabled={!isBeforeEndDate}
             >
@@ -118,12 +113,6 @@ export default function EditOrSubmitTeamButton({ team, hackathonEndDate, handleS
                                 onClick={handleSave}
                             >
                                 Save
-                            </button>
-                            <button
-                                className="bg-green-600 text-white rounded-full px-4 py-2 hover:bg-green-700"
-                                onClick={handleSubmit}
-                            >
-                                Submit
                             </button>
                         </div>
                     </div>

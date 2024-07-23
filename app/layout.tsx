@@ -1,56 +1,109 @@
-import { getFrameMetadata } from 'frog/next'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+/* eslint-disable @next/next/no-img-element */
 import './globals.css'
-import { FARHACK_C1_BANNER_URL } from '@/lib/utils'
-import Script from 'next/script'
+import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
+import { auth } from '../auth';
+import { karla } from "./lib/utils";
+import FarhackLogo from "./components/icons/farhack-logo";
+import SignInWithFarcaster from "./components/sign-in-with-farcaster";
+import Head from 'next/head';
+import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'] })
- 
-export async function generateMetadata(): Promise<Metadata> {
-  const url = process.env.VERCEL_URL || 'http://localhost:3000'
-  const frameMetadata = await getFrameMetadata(`${url}/api`)
-  return {
-    title: 'FarHack',
+export function generateMetadata(){
+  return{
+    metadataBase: new URL('https://farhack.xyz'),
+    title: {
+      default: 'FarHack',
+      template: '%s | FarHack',
+    },
     description: 'The ultimate Farcaster hackathon',
-    metadataBase: new URL("https://farhack.xyz"),
-    openGraph: {images:[FARHACK_C1_BANNER_URL]},
-    other: frameMetadata,
-  }
+    openGraph: {
+      title: 'FarHack',
+      description: 'The ultimate Farcaster hackathon',
+      images: ['https://i.imgur.com/4sLMVg2.png'],
+      url: 'https://farhack.xyz',
+      siteName: 'FarHack',
+      locale: 'en_US',
+      type: 'website',
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+  } as Metadata
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}): Promise<JSX.Element> {
+  const session = await auth()
+  if (session?.user) {
+    session.user = {
+      id: session.user.id,
+      name: session.user.name,
+      image: session.user.image,
+    }
+  }
+
   return (
     <html lang="en">
-      <link rel="icon" href="/favicon.ico" sizes="any" />
-      <meta property="fc:frame" content="vNext"/>
-      <meta property="fc:frame:image:aspect_ratio" content="1:1"/>
-      <meta property="fc:frame:image" content="https://i.imgur.com/b82q35A.png"/>
-      <meta property="fc:frame:post_url" content="https://farhack.xyz/api"/>
-      <meta property="fc:frame:state" content="%7B%22initialPath%22%3A%22%2Fapi%22%2C%22previousButtonValues%22%3A%5B%22next%22%2C%22_r%3Ahttps%3A%2F%2Ffarhack.xyz%22%5D%2C%22previousState%22%3A%7B%22count%22%3A0%7D%7D" />
-      <meta property="fc:frame:button:1" content="View images" data-value="next"/>
-      <meta property="fc:frame:button:1:action" content="post"/>
-      <meta property="fc:frame:button:2" content="Learn more" data-type="redirect" data-value="_r:https://farhack.xyz"/>
-      <meta property="fc:frame:button:2:action" content="post_redirect"/>
-     <Script
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="application-name" content="FarHack" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="FarHack" />
+        <meta name="description" content="The ultimate Farcaster hackathon" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="theme-color" content="#000000" />
+
+        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+      </Head>
+      <Script
         strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
       />
       <Script strategy="lazyOnload" id="google-analytics">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+          gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
           page_path: window.location.pathname,
           });
         `}
       </Script>
-      <body className={inter.className}>{children}</body>
+      <body className={`${karla.className} dark bg-black`}>
+        <SessionProvider basePath={"/api/auth"} session={session}>
+          <div className="flex flex-col gap-4 min-h-screen">
+            <a href="/">
+              <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
+                <FarhackLogo width={35} height={35} />
+                <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
+              </div>
+            </a>
+            <div className="absolute top-4 right-8">
+              <SignInWithFarcaster />
+            </div>
+            {children}
+          </div>
+        </SessionProvider>
+      </body>
     </html>
-  )
+  );
 }

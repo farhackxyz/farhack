@@ -1,12 +1,22 @@
-import Info from "@/components/info";
-import MasonryGrid from "@/components/masonry-grid";
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
+import { auth } from "@/auth";
+import { db } from "@/kysely";
+import Hackathons from "./components/hackathons";
 
-export default function Home() {
-  return (
-    <main className="w-full h-full flex flex-col md:flex-row overflow-y-hidden">
-      <Info />
-      <MasonryGrid />
-    </main>
-  );
+export default async function Page() {
+  const session = await auth()
+  if (session?.user) {
+    const user = await db.selectFrom('users')
+          .selectAll()
+          .where('name', '=', session.user.name ?? "")
+          .executeTakeFirst();
+
+    session.user = {
+      id: user?.id.toString() ?? "0",
+      name: session.user.name,
+      image: session.user.image,
+    }
+  }
+
+  return <Hackathons />;
 }

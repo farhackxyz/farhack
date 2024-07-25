@@ -13,11 +13,9 @@ const handleRequest = frames(async (ctx) => {
     ctx.state.count = 0;
   }
   return {
+    title: 'FarHack',
     image: BANNER_IMG,
     buttons: [
-      <Button action="post" target={{pathname: "/hackathons"}}>
-        Hackathons
-      </Button>,
        <Button action="link" target={BASE_URL}>View site</Button>
     ]
   };

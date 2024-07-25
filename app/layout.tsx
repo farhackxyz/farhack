@@ -58,6 +58,8 @@ export default async function RootLayout({
     <html lang="en">
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="og:title" content="FarHack" />
+        <title>FarHack</title>
         <meta name="application-name" content="FarHack" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />

@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import HackathonNav from '@/app/components/hackathon-nav';
-import { db } from '@/kysely';
 import { Team } from '@/app/lib/types';
 import { UserGroupIcon } from '@heroicons/react/20/solid';
+import { getHackathon, getTeams } from '../lib/fetchers';
 
 export default async function HackathonTeams({ slug }: { slug: string }) {
 
@@ -15,10 +15,7 @@ export default async function HackathonTeams({ slug }: { slug: string }) {
         );
     }
 
-    const hackathon = await db.selectFrom('hackathons')
-        .selectAll()
-        .where('slug', '=', slug)
-        .executeTakeFirst();
+    const hackathon = await getHackathon(slug);
 
     if (!hackathon) {
         return (
@@ -28,10 +25,7 @@ export default async function HackathonTeams({ slug }: { slug: string }) {
         );
     }
 
-    const teams = await db.selectFrom('teams')
-        .selectAll()
-        .where('hackathon_id', '=', hackathon.id)
-        .execute();
+    const teams = await getTeams();
 
     if (!teams) {
         return (

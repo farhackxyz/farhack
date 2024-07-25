@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { db } from '@/kysely';
 import { headers } from 'next/headers';
+import { getHackathon } from '@/app/lib/fetchers';
 import HackathonNav from '@/app/components/hackathon-nav';
 
 export default async function HackathonBySlugPage() {
@@ -10,10 +10,7 @@ export default async function HackathonBySlugPage() {
     const pathnameParts = pathname.split('/');
     const slug = pathnameParts[2];
 
-    const hackathon = await db.selectFrom('hackathons')
-        .selectAll()
-        .where('slug', '=', slug)
-        .executeTakeFirst();
+    const hackathon = await getHackathon(slug);
 
     if (!hackathon) {
         return (

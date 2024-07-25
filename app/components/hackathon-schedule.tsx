@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { db } from '@/kysely';
 import HackathonNav from '@/app/components/hackathon-nav';
 import { ScheduleItem } from '@/app/lib/types';
 import { CalendarIcon } from '@heroicons/react/20/solid';
+import { getHackathon } from '../lib/fetchers';
 
 export default async function HackathonSchedule({ slug }: { slug: string }) {
 
@@ -15,10 +15,7 @@ export default async function HackathonSchedule({ slug }: { slug: string }) {
         );
     }
 
-    const hackathon = await db.selectFrom('hackathons')
-        .selectAll()
-        .where('slug', '=', slug)
-        .executeTakeFirst();
+    const hackathon = await getHackathon(slug);
 
     if (!hackathon) {
         return (

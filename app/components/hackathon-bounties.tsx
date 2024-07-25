@@ -4,6 +4,7 @@ import { db } from '@/kysely';
 import HackathonNav from '@/app/components/hackathon-nav';
 import { Bounty } from '@/app/lib/types';
 import { TrophyIcon } from '@heroicons/react/20/solid';
+import { getHackathon } from '../lib/fetchers';
 
 export default async function HackathonBounties({ slug }: { slug: string }) {
     
@@ -15,10 +16,7 @@ export default async function HackathonBounties({ slug }: { slug: string }) {
         );
     }
 
-    const hackathon = await db.selectFrom('hackathons')
-        .selectAll()
-        .where('slug', '=', slug)
-        .executeTakeFirst();
+    const hackathon = await getHackathon(slug);
 
     if (!hackathon) {
         return (

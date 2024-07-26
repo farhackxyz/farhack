@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
     const id = searchParams.get("id");
 
     try {
-        let query = db.selectFrom('teams').selectAll();
+        let query: any = db.selectFrom('teams').selectAll();
 
         if (id) {
             query = query.where('id', '=', id as any);

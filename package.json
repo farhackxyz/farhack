@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coinbase/onchainkit": "^0.28.7",
     "@farcaster/auth-client": "^0.1.1",
     "@farcaster/auth-kit": "^0.3.1",
     "@heroicons/react": "^2.1.5",

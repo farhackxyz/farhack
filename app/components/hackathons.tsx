@@ -16,7 +16,12 @@ interface Hackathon {
 function HackathonListItem({ hackathon }: { hackathon: Hackathon }) {
   const now = new Date();
   const isLive = now >= new Date(hackathon.start_date) && now <= new Date(hackathon.end_date);
-  const dateLabel = isLive ? (
+  const dateLabel = hackathon.name === 'FarHack Kampung' ? (
+    <span className="flex flex-row gap-1 items-center rounded-xl bg-[#58499B] text-white px-2.5">
+      <TicketIcon className="w-3 text-white" aria-hidden="true" />
+      Buy Tickets
+    </span>
+  ) : (hackathon.id !== 3 && isLive) ? (
     <span className="flex items-center rounded-xl bg-white px-2.5 text-black">
       <span className="w-2.5 h-2.5 bg-red-600 rounded-full mr-1.5"></span>
       Live

@@ -8,6 +8,7 @@ import FarhackLogo from "./components/icons/farhack-logo";
 import SignInWithFarcaster from "./components/sign-in-with-farcaster";
 import Head from 'next/head';
 import Script from 'next/script';
+import OnchainProviders from './components/onchain-providers';
 
 export function generateMetadata(){
   return{
@@ -91,20 +92,22 @@ export default async function RootLayout({
         `}
       </Script>
       <body className={`${karla.className} dark bg-black`}>
-        <SessionProvider basePath={"/api/auth"} session={session}>
-          <div className="flex flex-col gap-4 min-h-screen">
-            <a href="/">
-              <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
-                <FarhackLogo width={35} height={35} />
-                <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
+        <OnchainProviders>
+          <SessionProvider basePath={"/api/auth"} session={session}>
+            <div className="flex flex-col gap-4 min-h-screen">
+              <a href="/">
+                <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
+                  <FarhackLogo width={35} height={35} />
+                  <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
+                </div>
+              </a>
+              <div className="absolute top-4 right-8">
+                <SignInWithFarcaster />
               </div>
-            </a>
-            <div className="absolute top-4 right-8">
-              <SignInWithFarcaster />
+              {children}
             </div>
-            {children}
-          </div>
-        </SessionProvider>
+          </SessionProvider>
+        </OnchainProviders>
       </body>
     </html>
   );

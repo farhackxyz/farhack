@@ -60,11 +60,21 @@ export interface InvitesTable {
   team_id?: number;
 }
 
+export interface TicketsTable {
+  id: Generated<number>;
+  user_id: number;
+  user_address: string;
+  hackathon_id: number;
+  txn_hash: string;
+  created_at: Generated<Date>;
+}
+
 export interface Database {
   users: UserTable;
   teams: TeamsTable;
   hackathons: HackathonsTable;
   invites: InvitesTable;
+  tickets: TicketsTable;
 }
 
 const connectionString = process.env.DATABASE_URL ?? "";
@@ -78,6 +88,24 @@ export const db = new Kysely<Database>({
     pool,
   }),
 });
+
+export const getTickets = async () => {
+  return await db.selectFrom('tickets').selectAll().execute();
+};
+
+export const addTicket = async (
+  userId: number,
+  userAddress: string,
+  hackathonId: number,
+  txnHash: string
+) => {
+  return await db.insertInto('tickets').values({
+    user_id: userId,
+    user_address: userAddress,
+    hackathon_id: hackathonId,
+    txn_hash: txnHash,
+  }).returningAll().executeTakeFirst();
+};
 
 export const addItem = async (
   hackathonId: number,

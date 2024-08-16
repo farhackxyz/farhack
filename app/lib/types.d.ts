@@ -25,6 +25,16 @@ export interface SessionUser {
     bounties: Bounty[];
     schedule: ScheduleItem[];
   }
+
+  export interface Ticket {
+    id: number;
+    user_id: number;
+    user_address: string;
+    hackathon_id: number;
+    txn_hash: string;
+    created_at: Date;
+  }
+  
   
   export interface Track {
     id: number;

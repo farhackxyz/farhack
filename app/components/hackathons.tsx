@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { type HackathonsTable, db } from "@/kysely";
+import { TicketIcon } from "@heroicons/react/20/solid";
 
 interface Hackathon {
   id: number;
@@ -68,7 +69,18 @@ export default async function Hackathons() {
         >
           The ultimate Farcaster hackathon
         </span>
-        <div className="pt-5 md:pt-10">
+
+        <div className="mt-4 md:mt-8 w-full flex justify-center">
+          <a
+            href="/hackathons/farhack-kampung-2024"
+            className="flex items-center rounded-full bg-[#58499B] px-4 py-2.5 text-white text-sm font-medium gap-2"
+          >
+            <TicketIcon className="w-7 text-white" aria-hidden="true" />
+            <p className="text-xl"><span className="font-semibold pr-2.5">Limited</span> Buy tickets to FarHack Kampung</p>
+          </a>
+        </div>
+
+        <div className="pt-7 md:pt-12">
           <div className="flex flex-wrap justify-center items-center gap-10">
             {hackathons.map((hackathon) => (
               <HackathonListItem key={hackathon.id} hackathon={hackathon} />

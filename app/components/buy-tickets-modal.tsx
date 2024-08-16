@@ -26,10 +26,12 @@ export default function BuyTicketsModal({ user, hasTicket, ticketsLeft }: { user
                 {hasTicket ? (
                     <p>You already have a ticket :D</p>
                 ) : user ? (
-                    ticketsLeft > 0 ? (
+                    ticketsLeft <= 60 ? (
                         <p>Buy Tickets ({ticketsLeft} left)</p>
-                    ) : (
+                    ) : ticketsLeft === 0 ? (
                         <p>Sold Out</p>
+                    ) : (
+                        <p>Buy Tickets</p>
                     )
                 ) : (
                     <p>Sign In to Buy Tickets</p>

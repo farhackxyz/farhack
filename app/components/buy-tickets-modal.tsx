@@ -3,7 +3,7 @@ import { ArrowUturnLeftIcon, TicketIcon } from "@heroicons/react/20/solid";
 import React from "react";
 import BuyTicketTransaction from "./buy-ticket-transaction";
 
-export default function BuyTicketsModal({ user, hasTicket, ticketsLeft }: { user: any, hasTicket: boolean, ticketsLeft: number }) {
+export default function BuyTicketsModal({ user, hasTicket, ticketsLeft, ticketType }: { user: any, hasTicket: boolean, ticketsLeft: number, ticketType: 'priority' | 'day' }) {
     const [showModal, setShowModal] = React.useState<boolean>(false);
 
     const handleOnClick = () => {
@@ -15,6 +15,31 @@ export default function BuyTicketsModal({ user, hasTicket, ticketsLeft }: { user
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
+    const renderText = () => {
+        if(ticketType === 'priority'){
+            return(
+                <>
+                    <p className="font-medium text-xl">Priority Ticket - 750 USDC</p>
+                    <p>8 days, 9 nights total</p>
+                    <p>Single or shared villa rooms</p>
+                    <p>Hackathon attendance</p>
+                    <p>Access to various onsite amenities</p>
+                </>
+            )
+        } else{
+            return(
+                <>
+                    <p className="font-medium text-xl">Day Ticket - 20 USDC</p>
+                    <p>8 days</p>
+                    <p>Hackathon attendance and workshops</p>
+                    <p>No sleeping accomodations</p>
+                </>
+            )
+        }
+    }
+
+    const typeUpperCase = ticketType === 'priority' ? 'Priority' : 'Day';
 
     return (
         <>
@@ -31,10 +56,10 @@ export default function BuyTicketsModal({ user, hasTicket, ticketsLeft }: { user
                     ) : ticketsLeft === 0 ? (
                         <p>Sold Out</p>
                     ) : (
-                        <p>Buy Tickets</p>
+                        <p>Buy {typeUpperCase} Ticket</p>
                     )
                 ) : (
-                    <p>Sign In to Buy Tickets</p>
+                    <p>Sign In to Buy {typeUpperCase} Ticket</p>
                 )}
             </div>
 
@@ -63,14 +88,9 @@ export default function BuyTicketsModal({ user, hasTicket, ticketsLeft }: { user
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1 items-center">
-                                <p className="font-medium text-xl">Priority Ticket - 750 USDC</p>
-                                <p>8 days, 9 nights total</p>
-                                <p>Single or shared villa rooms</p>
-                                <p>Hackathon attendance</p>
-                                <p>Access to various onsite amenities</p>
-                                <p>note: check Warpcast DMs for a receipt after!</p>
+                                {renderText()}
                             </div>
-                            <BuyTicketTransaction userId={user?.id} />
+                            <BuyTicketTransaction userId={user?.id} ticketType={ticketType} />
                         </div>
                     </div>
                 </>

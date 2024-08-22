@@ -32,6 +32,7 @@ export interface SessionUser {
     user_address: string;
     hackathon_id: number;
     txn_hash: string;
+    ticket_type: string; // 'priority' | 'day'
     created_at: Date;
   }
   

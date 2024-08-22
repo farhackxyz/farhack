@@ -28,8 +28,12 @@ export default async function FarhackKampung2024Page() {
     const user = await db.selectFrom('users').selectAll().where('name', '=', session?.user?.name ?? "").executeTakeFirst();
     const tickets = await db.selectFrom('tickets').selectAll().execute();
     const kampungTickets = tickets.filter(ticket => ticket.hackathon_id === 3);
-    const userHasTicket = kampungTickets.some(ticket => Number(ticket.user_id) === Number(user?.id ?? 0));
-    const ticketsLeft = 70 - kampungTickets.length;
+    const kampungPriorityTickets = tickets.filter(ticket => ticket.hackathon_id === 3 && ticket.ticket_type === 'priority');
+    const kampungDayTickets = tickets.filter(ticket => ticket.hackathon_id === 3 && ticket.ticket_type === 'day');
+    const userHasPriorityTicket = kampungTickets.some(ticket => Number(ticket.user_id) === Number(user?.id ?? 0) && ticket.ticket_type === 'priority');
+    const userHasDayTicket = kampungTickets.some(ticket => Number(ticket.user_id) === Number(user?.id ?? 0) && ticket.ticket_type === 'day');
+    const priorityTicketsLeft = 70 - kampungPriorityTickets.length;
+    const dayTicketsLeft = 100 - kampungPriorityTickets.length;
 
     const startDate = new Date(hackathon.start_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
     const endDate = new Date(hackathon.end_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
@@ -62,7 +66,8 @@ export default async function FarhackKampung2024Page() {
                         <p className="mt-2 text-xl font-normal text-white/95">
                             {hackathon.description}
                         </p>
-                        <BuyTicketsModal user={user} hasTicket={userHasTicket} ticketsLeft={ticketsLeft} />
+                        <BuyTicketsModal user={user} hasTicket={userHasPriorityTicket} ticketsLeft={priorityTicketsLeft} ticketType='priority' />
+                        <BuyTicketsModal user={user} hasTicket={userHasDayTicket} ticketsLeft={dayTicketsLeft} ticketType='day' />
                         <div className="mt-4 max-w-[75%]">
                             <div className="flex flex-row gap-2 items-center mb-1.5">
                                 <CalendarIcon className="w-4" />
@@ -83,10 +88,10 @@ export default async function FarhackKampung2024Page() {
                         <div className="mt-4 max-w-[75%]">
                             <div className="flex flex-row gap-2 items-center mb-1.5">
                                 <DocumentTextIcon className="w-4" />
-                                <p className="text-lg font-medium">Details</p>
+                                <p className="text-lg font-medium">Ticket Details</p>
                             </div>
                             <p className="text-lg">
-                                All prices are in USD and are per person. Priority tickets include full stay and the most comfortable accommodation. Standard tickets will also be available at a later date to offer more flexible options for those looking to attend for part of the time. Hackers will stay at our luxurious village in Singapore.
+                            All prices are in USD and are per person. Priority tickets include full stay and the most comfortable accommodation at our luxurious village in Singapore. There is also a local pass available for those who do not need accommodation but would like to participate in the Farcaster Hackathon.
                             </p>
                         </div>
                     </div>

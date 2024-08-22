@@ -67,7 +67,7 @@ export default async function FarhackKampung2024Page() {
                             {hackathon.description}
                         </p>
                         <BuyTicketsModal user={user} hasTicket={userHasPriorityTicket} ticketsLeft={priorityTicketsLeft} ticketType='priority' />
-                        <BuyTicketsModal user={user} hasTicket={userHasDayTicket} ticketsLeft={dayTicketsLeft} ticketType='day' />
+                        {!userHasPriorityTicket && <BuyTicketsModal user={user} hasTicket={userHasDayTicket} ticketsLeft={dayTicketsLeft} ticketType='day' />}
                         <div className="mt-4 max-w-[75%]">
                             <div className="flex flex-row gap-2 items-center mb-1.5">
                                 <CalendarIcon className="w-4" />

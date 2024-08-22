@@ -41,11 +41,11 @@ export const usdcAbi = [
   },
 ] as const;
 
-export default function BuyTicketTransaction({ userId }: { userId: string }) {
+export default function BuyTicketTransaction({ userId, ticketType }: { userId: string, ticketType: 'priority' | 'day' }) {
   const { address } = useAccount();
   const [txHash, setTxHash] = React.useState<string>('');
 
-  const priorityTicketUSDCPrice = '750';
+  const priorityTicketUSDCPrice = ticketType === 'priority' ? '750' : '20';
   const farhackWalletAdress = '0xda4a934f5770b73d2eb9e08713599331b5380704';
   const farhackHackathonId = 3;
  
@@ -73,6 +73,7 @@ export default function BuyTicketTransaction({ userId }: { userId: string }) {
           user_address: address,
           hackathon_id: farhackHackathonId,
           txn_hash: txHash,
+          ticket_type: ticketType
         }),
       });
 

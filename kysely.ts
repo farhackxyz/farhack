@@ -66,6 +66,7 @@ export interface TicketsTable {
   user_address: string;
   hackathon_id: number;
   txn_hash: string;
+  ticket_type: string;
   created_at: Generated<Date>;
 }
 

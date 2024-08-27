@@ -52,7 +52,19 @@ function Content() {
   );
 
   return (
-    <div>
+    <div className="flex flex-row gap-10 items-center">
+      {/* WIP: new nav items, need to add their content and also add mobile responsiveness here */}
+      {/* <div className={`flex flex-row gap-3 items-center ${session ? 'pt-2' : ''}`}>
+        <a className="underline" href="/about">
+          About
+        </a>
+        <a className="underline" href="/farstack">
+          FarStack
+        </a>
+        <a className="underline" href="/fridays">
+          Fridays
+        </a>
+      </div> */}
       {!session ? (
         <div className={`${karla.className} text-white`}>
           <SignInButton
@@ -66,10 +78,10 @@ function Content() {
       ) : (
         <div className="relative">
           <div className="pt-2 flex-row gap-2 items-center hidden md:flex">
-            <a href={`/profiles/${session.user?.name}`} className="flex flex-row gap-2 items-center bg-fcPurple text-white border-1 rounded-full px-2 py-1 pl-2 pr-2 cursor-pointer">
+            <div className="flex flex-row gap-2 items-center bg-fcPurple text-white border-1 rounded-full px-2 py-1 pl-2 pr-2">
               <img src={session.user?.image ?? ""} alt="User Image" className="w-8 h-8 rounded-full" />
               <p>{session.user?.name}</p>
-            </a>
+            </div>
             <div className="flex flex-row gap-2 items-center bg-red-500 text-white border-1 rounded-full px-2 py-2 pl-3 pr-3 cursor-pointer" onClick={() => signOut()}>
               <p className="font-medium">Logout</p>
             </div>

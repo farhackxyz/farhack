@@ -62,7 +62,7 @@ export default async function Hackathons() {
     hackathons.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
     return (
       <div className="pt-7 md:pt-12">
-        <div className="flex flex-wrap justify-center items-center gap-10">
+        <div className="flex flex-col md:flex-row md:flex-wrap justify-center md:justify-start items-center md:items-start gap-10">
           {hackathons.map((hackathon) => (
             <HackathonListItem key={hackathon.id} hackathon={hackathon} />
           ))}

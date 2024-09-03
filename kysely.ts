@@ -22,6 +22,7 @@ export interface UserTable {
   name: string;
   image: string;
   is_admin: boolean;
+  admin_hackathons: string;
 }
 
 export interface TeamsTable {

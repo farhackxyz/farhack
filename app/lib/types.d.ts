@@ -10,6 +10,7 @@ export interface SessionUser {
     name: string;
     image: string;
     is_admin: boolean;
+    admin_hackathons: string;
   }
   
   export interface Hackathon {

@@ -102,7 +102,7 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
     </Transaction>  
   ) : (
     <Wallet>
-      <ConnectWallet className="flex items-center justify-center bg-white text-black rounded-lg px-4 py-2">
+      <ConnectWallet className="flex items-center justify-center bg-white text-black rounded-lg px-4 py-2" withWalletAggregator>
         <Avatar className='h-6 w-6 mr-2' />
         <Name />
       </ConnectWallet>

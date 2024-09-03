@@ -1,10 +1,6 @@
 import { http, createConfig } from 'wagmi';
 import { base } from 'wagmi/chains';
-import { 
-  metaMaskWallet, 
-  rainbowWallet, 
-  coinbaseWallet, 
-} from '@rainbow-me/rainbowkit/wallets'; 
+import { coinbaseWallet } from '@rainbow-me/rainbowkit/wallets'; 
 import { connectorsForWallets } from '@rainbow-me/rainbowkit'; 
 
 const connectors = connectorsForWallets( 

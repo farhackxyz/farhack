@@ -1,6 +1,6 @@
 export default function WarpcastIcon() {
     return(
-        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="28" height="28" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
             <mask id="mask0_124_2" style={{maskType: 'luminance'}} maskUnits="userSpaceOnUse" x="0" y="0" width="17" height="17">
             <path d="M16.9536 0.953613H0.953613V16.9536H16.9536V0.953613Z" fill="white"/>
             </mask>

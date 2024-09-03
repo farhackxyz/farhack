@@ -9,6 +9,7 @@ import SignInWithFarcaster from "./components/sign-in-with-farcaster";
 import Head from 'next/head';
 import Script from 'next/script';
 import OnchainProviders from './components/onchain-providers';
+import WarpcastIcon from './components/icons/warpcast-icon';
 
 export function generateMetadata(){
   return{
@@ -102,7 +103,14 @@ export default async function RootLayout({
                 </div>
               </a>
               <div className="absolute top-4 right-8">
-                <SignInWithFarcaster />
+                <div className="flex flex-row gap-3 items-center">
+                  <div className="pt-1">
+                    <a href="https://warpcast.com/farhack" target="_blank">
+                      <WarpcastIcon />
+                    </a>
+                  </div>
+                  <SignInWithFarcaster />
+                </div>
               </div>
               {children}
             </div>

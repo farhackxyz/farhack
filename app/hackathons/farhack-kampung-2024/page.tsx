@@ -60,33 +60,38 @@ export default async function FarhackKampung2024Page() {
                                     Kampung Priority Pass: $750
                                 </p>
                             </div>
-                            <div className="flex flex-row gap-2 items-start text-lg max-w-auto md:max-w-[75%]">
-                                <p>
-                                    <b>Stay at: </b><br/>
-                                    -Luxury Villa at Singapore National Resort and Golf Course  <br/>
-                                    -Full Kitchen, Pool access and more  <br/>
-                                    -8 nights and 9 days  <br/>
-                                </p>
-                                <p>
-                                    <b>Access to: </b><br/>
-                                    -FarHack  <br/>
-                                    -ETHGlobal  <br/>
-                                    -Ethereum Singapore  <br/>
-                                </p>
+                            <div className="flex flex-row gap-8 items-start text-lg">
+                                <div className="w-1/2">
+                                    <p>
+                                        <b>Stay at:</b><br />
+                                        - Luxury Villa at Singapore National Resort and Golf Course<br />
+                                        - Full Kitchen, Pool access and more<br />
+                                        - 8 nights and 9 days<br />
+                                    </p>
+                                </div>
+                                <div className="w-1/2">
+                                    <p>
+                                        <b>Access to:</b><br />
+                                        - FarHack<br />
+                                        - ETHGlobal<br />
+                                        - Ethereum Singapore<br />
+                                    </p>
+                                </div>
                             </div>
                             <BuyTicketsModal user={user} hasTicket={userHasPriorityTicket} ticketsLeft={priorityTicketsLeft} ticketType='priority' />
                         </div>
-                        <div className="mt-7 max-w-[75%]">
-                            <div className="flex flex-row gap-2 items-center mb-2.5">
-                                <p className="text-xl font-medium">
-                                FarHack Day Pass: $20
-                                </p>
-                            </div>
-                            <p className="text-lg mb-5">
-                                Access to FarHack
-                            </p>
-                            {!userHasPriorityTicket ? <BuyTicketsModal user={user} hasTicket={userHasDayTicket} ticketsLeft={dayTicketsLeft} ticketType='day' /> : <></>}
-                        </div>
+<div className="mt-7 max-w-[75%]">
+    <div className="flex flex-row gap-2 items-center mb-2.5">
+        <p className="text-xl font-medium">
+            FarHack Day Pass: $20
+        </p>
+    </div>
+    <p className="text-lg mb-5">
+        Access to FarHack
+    </p>
+    {!userHasPriorityTicket ? <BuyTicketsModal user={user} hasTicket={userHasDayTicket} ticketsLeft={dayTicketsLeft} ticketType='day' /> : <></>}
+</div>
+
                     </div>
                     <div className="hidden md:flex flex-col md:w-1/2 gap-2">
                         <img src={hackathon.square_image} alt={`${hackathon?.name} Hackathon`} loading="lazy" className="rounded-lg w-[75%]" />

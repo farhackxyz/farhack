@@ -1,23 +1,28 @@
 import { auth } from '@/auth';
 import { db } from '@/kysely';
-import { headers } from 'next/headers';
 import AdminClientPage from '../components/admin-client-page';
 
 export default async function AdminPage() {
   const session = await auth();
-  const users = await db
-    .selectFrom('users')
-    .select([
-      'id',
-      'image',
-      'created_at',
-      'name',
-      'is_admin',
-      'admin_hackathons',
-    ])
-    .execute();
 
-  const teams = await db
+
+  const user = await db
+    .selectFrom('users')
+    .select(['is_admin', 'admin_hackathons'])
+    .where('name', '=', (session as any).user.name ?? "" as any)
+    .executeTakeFirstOrThrow();
+
+  const hackathonId = user.admin_hackathons !== 'all' ? parseInt(user.admin_hackathons, 10) : null;
+
+  if (!user.is_admin || (user.is_admin && user.admin_hackathons && !hackathonId && user.admin_hackathons !== 'all')) {
+    throw new Error('Unauthorized access');
+  }
+
+  const usersQuery = db
+    .selectFrom('users')
+    .select(['id', 'image', 'created_at', 'name', 'is_admin', 'admin_hackathons']);
+
+  const teamsQuery = db
     .selectFrom('teams')
     .select([
       'id',
@@ -28,10 +33,9 @@ export default async function AdminPage() {
       'submitted_at',
       'wallet_address',
       'embeds',
-    ])
-    .execute();
+    ]);
 
-  const hackathons = await db
+  const hackathonsQuery = db
     .selectFrom('hackathons')
     .select([
       'id',
@@ -42,8 +46,16 @@ export default async function AdminPage() {
       'created_at',
       'square_image',
       'slug',
-    ])
-    .execute();
+    ]);
+
+  if (hackathonId) {
+    teamsQuery.where('hackathon_id', '=', hackathonId);
+    hackathonsQuery.where('id', '=', hackathonId);
+  }
+
+  const users = await usersQuery.execute();
+  const teams = await teamsQuery.execute();
+  const hackathons = await hackathonsQuery.execute();
 
   const tables = {
     users: users.map((user) => ({
@@ -63,6 +75,7 @@ export default async function AdminPage() {
       submitted_at: team.submitted_at ? team.submitted_at.toISOString() : undefined,
       wallet_address: team.wallet_address,
       embeds: team.embeds,
+      canEdit: user.admin_hackathons === 'all' || (hackathonId && team.hackathon_id === hackathonId),
     })),
     hackathons: hackathons.map((hackathon) => ({
       id: hackathon.id.toString(),

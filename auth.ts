@@ -44,6 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             name: credentials?.name as string,
             image: credentials?.pfp as string,
             is_admin: false,
+            admin_hackathons: ''
           }).execute();
 
           user = await db.selectFrom('users')

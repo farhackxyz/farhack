@@ -9,7 +9,7 @@ import SignInWithFarcaster from "./components/sign-in-with-farcaster";
 import Head from 'next/head';
 import Script from 'next/script';
 import OnchainProviders from './components/onchain-providers';
-import WarpcastIcon from './components/icons/warpcast-icon';
+import { headers } from 'next/headers';
 
 export function generateMetadata(){
   return{
@@ -48,6 +48,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }): Promise<JSX.Element> {
   const session = await auth()
+  const headerList = headers();
+  const pathname = headerList.get("x-current-path");
+  const isAdmin = pathname && pathname.split('/').pop() === 'admin';
+
   if (session?.user) {
     session.user = {
       id: session.user.id,
@@ -95,25 +99,20 @@ export default async function RootLayout({
       <body className={`${karla.className} dark bg-black`}>
         <OnchainProviders>
           <SessionProvider basePath={"/api/auth"} session={session}>
-            <div className="flex flex-col gap-4 min-h-screen">
-              <a href="/">
-                <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
-                  <FarhackLogo width={35} height={35} />
-                  <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
-                </div>
-              </a>
-              <div className="absolute top-4 right-8">
-                <div className="flex flex-row gap-3 items-center">
-                  <div className="pt-1">
-                    <a href="https://warpcast.com/farhack" target="_blank">
-                      <WarpcastIcon />
-                    </a>
+            {isAdmin ? children : 
+                <div className="flex flex-col gap-4 min-h-screen">
+                <a href="/">
+                  <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
+                    <FarhackLogo width={35} height={35} />
+                    <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
                   </div>
+                </a>
+                <div className="absolute top-4 right-8">
                   <SignInWithFarcaster />
                 </div>
+                {children}
               </div>
-              {children}
-            </div>
+            }
           </SessionProvider>
         </OnchainProviders>
       </body>

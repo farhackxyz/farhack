@@ -5,9 +5,9 @@ export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
 
-        const { user_id, user_address, hackathon_id, txn_hash, ticket_type } = body;
+        const { user_id, user_address, hackathon_id, txn_hash, ticket_type, amount } = body;
 
-        if (!user_id || !user_address || !hackathon_id || !txn_hash || !ticket_type) {
+        if (!user_id || !user_address || !hackathon_id || !txn_hash || !ticket_type || !amount) {
             return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
         }
 
@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
                 hackathon_id,
                 txn_hash,
                 ticket_type,
+                amount,
                 created_at: new Date()
             })
             .returningAll()

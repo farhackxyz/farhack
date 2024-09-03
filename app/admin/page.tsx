@@ -1,103 +1,180 @@
-import { auth } from '@/auth';
-import { db } from '@/kysely';
-import AdminClientPage from '../components/admin-client-page';
+import * as React from "react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
+import { auth } from "@/auth"
 
-export default async function AdminPage() {
+export default async function AdminHomePage() {
   const session = await auth();
 
-
-  const user = await db
-    .selectFrom('users')
-    .select(['is_admin', 'admin_hackathons'])
-    .where('name', '=', (session as any).user.name ?? "" as any)
-    .executeTakeFirstOrThrow();
-
-  const hackathonId = user.admin_hackathons !== 'all' ? parseInt(user.admin_hackathons, 10) : null;
-
-  if (!user.is_admin || (user.is_admin && user.admin_hackathons && !hackathonId && user.admin_hackathons !== 'all')) {
-    throw new Error('Unauthorized access');
+  if (!session?.user) {
+    return (
+      <div className="flex min-h-screen w-full flex-col bg-muted/40 justify-center items-center">
+        <h1 className="text-2xl font-bold">Please log in to view your dashboard</h1>
+      </div>
+    );
   }
-
-  const usersQuery = db
-    .selectFrom('users')
-    .select(['id', 'image', 'created_at', 'name', 'is_admin', 'admin_hackathons']);
-
-  const teamsQuery = db
-    .selectFrom('teams')
-    .select([
-      'id',
-      'name',
-      'fids',
-      'description',
-      'hackathon_id',
-      'submitted_at',
-      'wallet_address',
-      'embeds',
-    ]);
-
-  const hackathonsQuery = db
-    .selectFrom('hackathons')
-    .select([
-      'id',
-      'name',
-      'description',
-      'start_date',
-      'end_date',
-      'created_at',
-      'square_image',
-      'slug',
-    ]);
-
-  if (hackathonId) {
-    teamsQuery.where('hackathon_id', '=', hackathonId);
-    hackathonsQuery.where('id', '=', hackathonId);
-  }
-
-  const users = await usersQuery.execute();
-  const teams = await teamsQuery.execute();
-  const hackathons = await hackathonsQuery.execute();
-
-  const tables = {
-    users: users.map((user) => ({
-      id: user.id.toString(),
-      image: user.image,
-      created_at: user.created_at.toISOString(),
-      name: user.name,
-      is_admin: user.is_admin,
-      admin_hackathons: user.admin_hackathons,
-    })),
-    teams: teams.map((team) => ({
-      id: team.id.toString(),
-      name: team.name,
-      fids: team.fids,
-      description: team.description,
-      hackathon_id: team.hackathon_id.toString(),
-      submitted_at: team.submitted_at ? team.submitted_at.toISOString() : undefined,
-      wallet_address: team.wallet_address,
-      embeds: team.embeds,
-      canEdit: user.admin_hackathons === 'all' || (hackathonId && team.hackathon_id === hackathonId),
-    })),
-    hackathons: hackathons.map((hackathon) => ({
-      id: hackathon.id.toString(),
-      name: hackathon.name,
-      description: hackathon.description,
-      start_date: hackathon.start_date.toISOString(),
-      end_date: hackathon.end_date.toISOString(),
-      created_at: hackathon.created_at.toISOString(),
-      square_image: hackathon.square_image,
-      slug: hackathon.slug,
-    })),
-  };
 
   return (
-    <AdminClientPage
-      session={{
-        user: {
-          name: session?.user?.name || '',
-          image: session?.user?.image || '',
-        },
-      }}
-      tables={tables}
-    />
-  );
+    <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+        <Card className="sm:col-span-2">
+          <CardHeader>
+            <CardTitle className="text-2xl">Welcome, {session.user.name}</CardTitle>
+          </CardHeader>
+          {/* <CardFooter>
+            <Button>Add item</Button>
+          </CardFooter> */}
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardDescription>This Week</CardDescription>
+            <CardTitle className="text-4xl">$1,329</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-xs text-muted-foreground">+25% from last week</div>
+          </CardContent>
+          <CardFooter>
+            <Progress value={25} aria-label="25% increase" />
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader className="pb-2">
+            <CardDescription>This Month</CardDescription>
+            <CardTitle className="text-4xl">$5,329</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-xs text-muted-foreground">+10% from last month</div>
+          </CardContent>
+          <CardFooter>
+            <Progress value={12} aria-label="12% increase" />
+          </CardFooter>
+        </Card>
+      </div>
+      <Tabs defaultValue="week">
+        <div className="flex items-center">
+          <TabsList>
+            <TabsTrigger value="week">Week</TabsTrigger>
+            <TabsTrigger value="month">Month</TabsTrigger>
+            <TabsTrigger value="year">Year</TabsTrigger>
+          </TabsList>
+          <div className="ml-auto flex items-center gap-2">
+            <Button size="sm" variant="outline" className="h-7 gap-1 text-sm">
+              <span className="sr-only sm:not-sr-only">Export</span>
+            </Button>
+          </div>
+        </div>
+        <TabsContent value="week">
+          <Card>
+            <CardHeader className="px-7">
+              <CardTitle>Orders</CardTitle>
+              <CardDescription>Recent orders from your store.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Customer</TableHead>
+                    <TableHead className="hidden sm:table-cell">Type</TableHead>
+                    <TableHead className="hidden sm:table-cell">Status</TableHead>
+                    <TableHead className="hidden md:table-cell">Date</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="bg-accent">
+                    <TableCell>
+                      <div className="font-medium">Liam Johnson</div>
+                      <div className="hidden text-sm text-muted-foreground md:inline">
+                        liam@example.com
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">Sale</TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <Badge className="text-xs" variant="secondary">
+                        Fulfilled
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
+                    <TableCell className="text-right">$250.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <div className="font-medium">Olivia Smith</div>
+                      <div className="hidden text-sm text-muted-foreground md:inline">
+                        olivia@example.com
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">Refund</TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <Badge className="text-xs" variant="outline">
+                        Declined
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
+                    <TableCell className="text-right">$150.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <div className="font-medium">Noah Williams</div>
+                      <div className="hidden text-sm text-muted-foreground md:inline">
+                        noah@example.com
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">Subscription</TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <Badge className="text-xs" variant="secondary">
+                        Fulfilled
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">2023-06-25</TableCell>
+                    <TableCell className="text-right">$350.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <div className="font-medium">Emma Brown</div>
+                      <div className="hidden text-sm text-muted-foreground md:inline">
+                        emma@example.com
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">Sale</TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <Badge className="text-xs" variant="secondary">
+                        Fulfilled
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
+                    <TableCell className="text-right">$450.00</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
 }

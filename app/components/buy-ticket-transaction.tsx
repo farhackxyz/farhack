@@ -73,7 +73,8 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
           user_address: address,
           hackathon_id: farhackHackathonId,
           txn_hash: txHash,
-          ticket_type: ticketType
+          ticket_type: ticketType,
+          amount: parseInt(ticketPriceUSDC)
         }),
       });
 

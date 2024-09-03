@@ -50,7 +50,7 @@ export default async function RootLayout({
   const session = await auth()
   const headerList = headers();
   const pathname = headerList.get("x-current-path");
-  const isAdmin = pathname && pathname.split('/').pop() === 'admin';
+  const isAdmin = pathname && pathname.includes('/admin');
 
   if (session?.user) {
     session.user = {

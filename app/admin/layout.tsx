@@ -201,7 +201,7 @@ export default async function AdminLayout({
             <Tooltip>
               <TooltipTrigger asChild>
                 <a
-                  href="#"
+                  href="/admin/settings"
                   className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8 ${
                     isCurrent("/admin/settings")
                       ? "bg-accent text-accent-foreground"

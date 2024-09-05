@@ -15,6 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { db } from "@/kysely"
+import { auth } from "@/auth"
 
 type Hackathon = {
   id: number
@@ -45,7 +46,19 @@ const getHackathons = async (): Promise<Hackathon[]> => {
 }
 
 export default async function HackathonsPage() {
-  const hackathons = await getHackathons()
+  const session = await auth();
+
+  if (!session?.user) {
+    return (
+      <div className="flex min-h-screen w-full flex-col bg-muted/40 justify-center items-center">
+        <h1 className="text-2xl font-bold">Please log in to view your dashboard</h1>
+      </div>
+    );
+  }
+
+  const user = await db.selectFrom('users').selectAll().where('name', '=', (session as any).user.name ?? "").executeTakeFirst();
+
+  const hackathons = await getHackathons();
 
   return (
     <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
@@ -70,16 +83,30 @@ export default async function HackathonsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {hackathons.map(hackathon => (
-                  <TableRow key={hackathon.id}>
-                    <TableCell>{hackathon.name}</TableCell>
-                    <TableCell>{hackathon.description}</TableCell>
-                    <TableCell>{new Date(hackathon.start_date).toLocaleDateString()}</TableCell>
-                    <TableCell>{new Date(hackathon.end_date).toLocaleDateString()}</TableCell>
-                    <TableCell>{new Date(hackathon.created_at).toLocaleDateString()}</TableCell>
-                    <TableCell>{hackathon.slug}</TableCell>
-                  </TableRow>
-                ))}
+                {hackathons
+                  .filter((hackathon) => {
+                    if (user?.admin_hackathons === 'all') return true;
+
+                    const adminHackathonIds = user?.admin_hackathons?.split(',').map(Number);
+
+                    if (!Array.isArray(adminHackathonIds)) {
+                      console.log(`Invalid admin_hackathons: ${user?.admin_hackathons}`);
+                      return false;
+                    }
+
+                    console.log(`Checking hackathon ID ${hackathon.id} against admin IDs:`, adminHackathonIds);
+                    return adminHackathonIds.includes(hackathon.id);
+                  })
+                  .map(hackathon => (
+                    <TableRow key={hackathon.id}>
+                      <TableCell>{hackathon.name}</TableCell>
+                      <TableCell>{hackathon.description}</TableCell>
+                      <TableCell>{new Date(hackathon.start_date).toLocaleDateString()}</TableCell>
+                      <TableCell>{new Date(hackathon.end_date).toLocaleDateString()}</TableCell>
+                      <TableCell>{new Date(hackathon.created_at).toLocaleDateString()}</TableCell>
+                      <TableCell>{hackathon.slug}</TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </div>

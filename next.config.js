@@ -1,6 +1,17 @@
-const withPWA = require('next-pwa')({
-    dest: 'public'
-})
-  
-module.exports = withPWA({
-});
+
+module.exports = {
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'i.imgur.com',
+            pathname: '/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'arweave.net',
+            pathname: '/**',
+          },
+        ],
+    },
+};

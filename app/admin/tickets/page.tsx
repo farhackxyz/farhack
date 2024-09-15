@@ -51,14 +51,6 @@ const getStartOfWeek = () => {
   return new Date(now.setDate(date));
 }
 
-const getAllTimeSales = async () => {
-  const allTimeSales = await db.selectFrom('tickets')
-    .select(sql<string>`COALESCE(SUM(amount), 0)::numeric`.as('total'))
-    .executeTakeFirst();
-
-  return parseFloat(allTimeSales?.total ?? '0');
-}
-
 const formatCurrency = (amount: number) => {
   return amount.toLocaleString("en-US", {
     style: "currency",
@@ -101,33 +93,19 @@ export default async function AdminHomePage() {
       </div>
     );
   }
-  const allTimeSales = await getAllTimeSales();
+
   const recentTickets = await getRecentTickets();
 
   return (
     <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
       <div className="grid gap-4 grid-cols-1">
-        <Card className="bg-transparent border-none space-y-0 p-0">
-          <CardHeader className="bg-transparent space-y-0 p-0 pt-2 pb-2">
-            <CardTitle className="text-2xl">Welcome, {session.user.name}!</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Total Sales</CardDescription>
-            <CardTitle className="text-4xl">{formatCurrency(allTimeSales)}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-xs text-muted-foreground">All time</div>
-          </CardContent>
-        </Card>
       </div>
       <Tabs defaultValue="all">
         <TabsContent value="all">
           <Card>
             <CardHeader className="px-7">
-              <CardTitle>Recent Tickets</CardTitle>
-              <CardDescription>Recent ticket purchases</CardDescription>
+              <CardTitle>Tickets</CardTitle>
+              <CardDescription>All ticket purchases</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">

@@ -22,6 +22,7 @@ export interface UserTable {
   name: string;
   image: string;
   is_admin: boolean;
+  admin_hackathons: string;
 }
 
 export interface TeamsTable {
@@ -67,6 +68,7 @@ export interface TicketsTable {
   hackathon_id: number;
   txn_hash: string;
   ticket_type: string;
+  amount: number;
   created_at: Generated<Date>;
 }
 
@@ -99,14 +101,16 @@ export const addTicket = async (
   userAddress: string,
   hackathonId: number,
   txnHash: string,
-  ticketType: 'priority' | 'day'
+  ticketType: 'priority' | 'day',
+  amount: number
 ) => {
   return await db.insertInto('tickets').values({
     user_id: userId,
     user_address: userAddress,
     hackathon_id: hackathonId,
     txn_hash: txnHash,
-    ticket_type: ticketType
+    ticket_type: ticketType,
+    amount: amount
   }).returningAll().executeTakeFirst();
 };
 

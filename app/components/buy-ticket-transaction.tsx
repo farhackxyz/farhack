@@ -45,7 +45,7 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
   const { address } = useAccount();
   const [txHash, setTxHash] = React.useState<string>('');
 
-  const priorityTicketUSDCPrice = ticketType === 'priority' ? '750' : '20';
+  const ticketPriceUSDC = ticketType === 'priority' ? '750' : '20';
   const farhackWalletAdress = '0xda4a934f5770b73d2eb9e08713599331b5380704';
   const farhackHackathonId = 3;
  
@@ -54,7 +54,7 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
       address: usdcContractAddress,
       abi: usdcAbi,
       functionName: 'transfer',
-      args: [farhackWalletAdress, parseUnits(priorityTicketUSDCPrice, 6)],
+      args: [farhackWalletAdress, parseUnits(ticketPriceUSDC, 6)],
     },
   ];
 
@@ -73,7 +73,8 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
           user_address: address,
           hackathon_id: farhackHackathonId,
           txn_hash: txHash,
-          ticket_type: ticketType
+          ticket_type: ticketType,
+          amount: parseInt(ticketPriceUSDC)
         }),
       });
 
@@ -85,7 +86,7 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
     }
   }
 
-  return txHash ? <p>You have already purchsaed a ticket</p> : address ? (
+  return txHash ? <p>You have already purchased a ticket</p> : address ? (
     <Transaction
       address={address}
       chainId={base.id}
@@ -93,7 +94,7 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
       onSuccess={(response) => handleTxnSuccess(response)}
       className="flex items-center justify-center text-center"
     >
-      <TransactionButton className={'rounded-lg bg-white text-black w-auto max-w-[60%] px-4 py-1.5'} text={`Pay ${priorityTicketUSDCPrice} USDC on Base`} />
+      <TransactionButton className={'rounded-lg bg-white text-black w-auto max-w-[60%] px-4 py-1.5'} text={`Pay ${ticketPriceUSDC} USDC on Base`} />
       <TransactionSponsor />
       <TransactionStatus>
         <TransactionStatusLabel />
@@ -102,8 +103,8 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
     </Transaction>  
   ) : (
     <Wallet>
-      <ConnectWallet>
-        <Avatar className='h-6 w-6' />
+      <ConnectWallet className="flex items-center justify-center bg-white text-black rounded-lg px-4 py-2" withWalletAggregator>
+        <Avatar className='h-6 w-6 mr-2' />
         <Name />
       </ConnectWallet>
     </Wallet>

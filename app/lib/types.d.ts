@@ -10,6 +10,7 @@ export interface SessionUser {
     name: string;
     image: string;
     is_admin: boolean;
+    admin_hackathons: string;
   }
   
   export interface Hackathon {
@@ -33,6 +34,7 @@ export interface SessionUser {
     hackathon_id: number;
     txn_hash: string;
     ticket_type: string; // 'priority' | 'day'
+    amount: number;
     created_at: Date;
   }
   

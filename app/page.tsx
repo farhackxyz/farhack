@@ -32,19 +32,6 @@ export default async function Home() {
     >
       The ultimate Farcaster hackathon
     </span>
-      {/* Temporary Limited Tickets banner for FarHack Kampung */}
-      <div className="mt-4 md:mt-8 w-full flex justify-center px-2">
-        <a
-          href="/hackathons/farhack-kampung-2024"
-          className="flex items-center rounded-full bg-[#58499B] px-3 py-2 text-white text-sm font-medium gap-2 md:px-4 md:py-2.5 md:text-base"
-        >
-          <TicketIcon className="w-5 text-white md:w-7" aria-hidden="true" />
-          <p className="text-base md:text-xl flex items-center gap-1 md:gap-2">
-            <span className="font-semibold whitespace-nowrap">Limited</span>
-            <span className="whitespace-nowrap">Buy tickets to FarHack Kampung</span>
-          </p>
-        </a>
-      </div>
       <Hackathons />
     </div>
   );

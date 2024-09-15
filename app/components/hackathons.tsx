@@ -19,7 +19,7 @@ function HackathonListItem({ hackathon }: { hackathon: Hackathon }) {
   const dateLabel = hackathon.name === 'FarHack Kampung' ? (
     <span className="flex flex-row gap-1 items-center rounded-xl bg-[#58499B] text-white px-2.5">
       <TicketIcon className="w-3 text-white" aria-hidden="true" />
-      Buy Tickets
+      Sold Out
     </span>
   ) : (hackathon.id !== 3 && isLive) ? (
     <span className="flex items-center rounded-xl bg-white px-2.5 text-black">

@@ -45,7 +45,7 @@ export default async function HackathonTeams({ slug }: { slug: string }) {
                 <>
                     <p className="text-2xl font-semibold mt-5 mb-3">Teams</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full pr-[4.5%]">
-                        {teams.map((team: any) => {
+                        {teams.filter((team: any) => parseInt(team.hackathon_id) === parseInt(hackathon.id ?? 0)).map((team: any) => {
                             const coverImage = team.embeds.find((embed: any) => embed.type === 'image')?.url;
                             return (
                                 <div key={team.id} className="flex flex-col justify-between gap-1 items-start p-4 rounded-md bg-baseGrey hover:bg-gray-500 text-white transition-colors duration-200">

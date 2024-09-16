@@ -15,10 +15,10 @@ const hackathonPages = [
         name: 'Bounties',
         slug: '/bounties'
     },
-    {
-        name: 'Schedule',
-        slug: '/schedule'
-    },
+    // {
+    //     name: 'Schedule',
+    //     slug: '/schedule'
+    // },
     {
         name: 'Teams',
         slug: '/teams'

@@ -53,6 +53,7 @@ export default async function YourTeamPage() {
     const team = await db.selectFrom('teams')
         .selectAll()
         .where(sql<boolean>`fids @> ARRAY[${user.id}]::int[]`)
+        .where('hackathon_id', '=', hackathon.id)
         .executeTakeFirst();
 
     let teamMembers: any = [];

@@ -13,7 +13,7 @@ import { BASE_URL } from '@/app/lib/utils';
 import SubmitTeamButton from '@/app/components/submit-team-button';
 import { getHackathon } from '@/app/lib/fetchers';
 import Error from '@/app/components/error';
-import { handleGenerateInvite } from '@/app/lib/server/teams';
+import { createTeam, handleDeleteTeam, handleGenerateInvite, handleLeaveTeam, handleSaveTeam, handleSubmitTeam } from '@/app/lib/server/teams';
 
 export default async function YourTeamPage() {
     const headerList = headers();
@@ -110,6 +110,7 @@ export default async function YourTeamPage() {
                                 <DeleteOrLeaveTeamButton 
                                     teamId={team.id} 
                                     userId={user.id} 
+                                    hackathonSlug={hackathon.slug}
                                     teamMembers={teamMembers} 
                                     handleDeleteTeam={handleDeleteTeam} 
                                     handleLeaveTeam={handleLeaveTeam} 

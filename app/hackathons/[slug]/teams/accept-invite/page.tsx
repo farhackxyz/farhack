@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { headers } from 'next/headers';
-import { db, acceptInvite } from '@/kysely';
+import { db } from '@/kysely';
 import { auth } from '@/auth';
+import { acceptInvite } from '@/app/lib/server/invites';
 
 export default async function AcceptInvitePage() {
     const headerList = headers();

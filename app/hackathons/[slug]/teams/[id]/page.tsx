@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { headers } from 'next/headers';
-import { db, sql, createInvite } from '@/kysely';
+import { db, sql } from '@/kysely';
 import { auth } from '@/auth';
 import HackathonNav from '@/app/components/hackathon-nav';
 import InviteButton from '@/app/components/invite-button';
@@ -12,6 +12,7 @@ import { redirect } from 'next/navigation';
 import { BASE_URL } from '@/app/lib/utils';
 import SubmitTeamButton from '@/app/components/submit-team-button';
 import { getHackathon, getTeam } from '@/app/lib/fetchers';
+import { createInvite } from '@/app/lib/server/invites';
 
 export default async function TeamByIdPage() {
     const headerList = headers();

@@ -196,7 +196,7 @@ function PrizesTable() {
   );
 }
 
-const masonryGridImages = [
+export const masonryGridImages = [
   {
     "alt": "FarHack at FarCon poster",
     "src": "https://i.imgur.com/hAeS72B.jpeg"

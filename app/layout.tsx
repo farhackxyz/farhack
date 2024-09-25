@@ -101,16 +101,16 @@ export default async function RootLayout({
           <SessionProvider basePath={"/api/auth"} session={session}>
             {isAdmin ? children : 
                 <div className="flex flex-col gap-4 min-h-screen">
-                <a href="/">
-                  <div className="absolute top-6 left-8 flex flex-row gap-4 items-center">
-                    <FarhackLogo width={35} height={35} />
-                    <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
+                  <div className="w-full flex flex-row justify-between absolute top-0 left-0 right-0 pt-4 pl-3 pr-3 bg-transparent md:bg-black z-10">
+                    <a href="/">
+                      <div className="flex flex-row gap-4 items-center">
+                        <FarhackLogo width={35} height={35} />
+                        <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
+                      </div>
+                    </a>
+                    <SignInWithFarcaster />
                   </div>
-                </a>
-                <div className="absolute top-4 right-8">
-                  <SignInWithFarcaster />
-                </div>
-                {children}
+                  {children}
               </div>
             }
           </SessionProvider>

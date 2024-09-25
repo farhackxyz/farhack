@@ -16,7 +16,7 @@ export default function Home() {
       </div>
       <div className="flex items-center justify-center w-full md:mt-0">
         <div className="mx-auto grid w-[350px] gap-6 h-full overflow-hidden">
-          <div className="flex flex-col gap-1 items-start mt-[20%] md:mt-[50%]">
+          <div className="flex flex-col gap-1 items-start mt-[10%]">
             <h1 className="text-4xl font-bold text-white">FarHack</h1>
             <span
               className="text-[7vw] md:text-[8vw] lg:text-[32px] leading-[7vw] md:leading-[6.5vw] lg:leading-[32px] text-left font-karla font-bold mt-3"
@@ -29,7 +29,7 @@ export default function Home() {
             >
               The ultimate Farcaster hackathon
             </span>
-            <div className="mt-[15%]">
+            <div className="mt-[5%]">
               <Hackathons />
             </div>
           </div>

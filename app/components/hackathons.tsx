@@ -55,9 +55,9 @@ export default async function Hackathons() {
   if (hackathons) {
     hackathons.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
     return (
-      <div className="flex flex-col gap-4 items-start">
+      <div className="flex flex-col gap-4 items-start pt-8">
         <p className="text-2xl font-bold">Hackathons</p>
-        <div className="flex overflow-x-scroll snap-x snap-mandatory gap-4 items-start">
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 items-start">
           {hackathons.map((hackathon) => (
             <div key={hackathon.id} className="snap-center">
               <HackathonListItem hackathon={hackathon} />

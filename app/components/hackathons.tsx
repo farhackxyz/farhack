@@ -58,7 +58,7 @@ export default async function Hackathons() {
     return (
       <div className="pt-5 md:pt-8">
         <p className="pb-4 text-2xl font-medium">Hackathons</p>
-        <div className="flex flex-col md:flex-row md:flex-wrap justify-center md:justify-start items-center md:items-start gap-10">
+        <div className="flex flex-col md:flex-row justify-center md:justify-start items-center md:items-start gap-10">
           {hackathons.map((hackathon) => (
             <HackathonListItem key={hackathon.id} hackathon={hackathon} />
           ))}

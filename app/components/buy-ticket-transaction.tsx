@@ -88,7 +88,6 @@ export default function BuyTicketTransaction({ userId, ticketType }: { userId: s
 
   return txHash ? <p>You have already purchased a ticket</p> : address ? (
     <Transaction
-      address={address}
       chainId={base.id}
       contracts={contracts as any}
       onSuccess={(response) => handleTxnSuccess(response)}

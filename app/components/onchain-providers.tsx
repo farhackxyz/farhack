@@ -1,6 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
-import { base } from 'viem/chains';
+import { base } from 'wagmi/chains';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { WagmiProvider } from 'wagmi';
 import { wagmiConfig } from '../lib/wagmi';
@@ -17,10 +17,7 @@ function OnchainProviders({ children }: Props) {
   return (
     <WagmiProvider config={wagmiConfig}>
         <QueryClientProvider client={queryClient}>
-            <OnchainKitProvider
-            apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY} 
-            chain={base}
-            >
+            <OnchainKitProvider apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY} chain={base as any}>
               <RainbowKitProvider modalSize="compact">
                 {children}
               </RainbowKitProvider>

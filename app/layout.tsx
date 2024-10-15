@@ -10,6 +10,8 @@ import Head from 'next/head';
 import Script from 'next/script';
 import OnchainProviders from './components/onchain-providers';
 import { headers } from 'next/headers';
+import Link from 'next/link';
+import { Package2 } from 'lucide-react';
 
 export function generateMetadata(){
   return{
@@ -101,15 +103,38 @@ export default async function RootLayout({
           <SessionProvider basePath={"/api/auth"} session={session}>
             {isAdmin ? children : 
                 <div className="flex flex-col gap-4 min-h-screen">
-                  <div className="w-full flex flex-row justify-between absolute top-0 left-0 right-0 pt-4 pl-3 pr-3 bg-transparent md:bg-black z-10">
-                    <a href="/">
-                      <div className="flex flex-row gap-4 items-center">
+                  <nav className="w-full bg-black/75 flex items-center justify-between p-4 pb-3 border-b border-white/20">
+                    <div className="flex items-center gap-6">
+                      <Link
+                        href="#"
+                        className="flex items-center gap-2 text-lg font-semibold md:text-base"
+                      >
                         <FarhackLogo width={35} height={35} />
                         <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
-                      </div>
-                    </a>
-                    <SignInWithFarcaster />
-                  </div>
+                      </Link>
+                      <Link
+                        href="#"
+                        className="text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        About
+                      </Link>
+                      <Link
+                        href="#"
+                        className="text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        Hackathons
+                      </Link>
+                      {/* <Link
+                        href="#"
+                        className="rounded-full bg-[#3a3a3a] text-white/75 hover:text-white px-2 py-1"
+                      >
+                        + New Hackathon
+                      </Link> */}
+                    </div>
+                    <div className="flex items-center gap-6">
+                      <SignInWithFarcaster />
+                    </div>
+                  </nav>
                   {children}
               </div>
             }

@@ -20,19 +20,24 @@ export default async function Home() {
   }
 
   return (
-    <div className={`text-white flex flex-col gap-1 items-center mt-[17%] sm:mt-[12%] md:mt-[7%] p-4`}>
-      <span
-      className="text-[8vw] md:text-[6vw] lg:text-[67.1653px] leading-[10vw] md:leading-[6.5vw] lg:leading-[79px] text-center font-karla font-bold"
-      style={{
-        WebkitTextFillColor: 'black',
-        WebkitTextStrokeWidth: '1.5px',
-        WebkitTextStrokeColor: '#8A63D2',
-        textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-      }}
-    >
-      The ultimate Farcaster hackathon
-    </span>
-      <Hackathons />
+    <div className="text-white flex flex-col gap-1 items-start mt-[6%] sm:mt-[4%] md:mt-[2%] p-4">
+      <div className="pl-3">
+        <span
+          className="text-[10vw] md:text-[8vw] lg:text-[45px] leading-[12vw] md:leading-[8vw] lg:leading-[70px] text-left font-karla font-bold"
+          style={{
+            WebkitTextFillColor: 'black',
+            WebkitTextStrokeWidth: '1.5px',
+            WebkitTextStrokeColor: '#8A63D2',
+            textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+          }}
+        >
+          The ultimate Farcaster hackathon
+        </span>
+        <p className="text-left text-sm md:text-base lg:text-lg max-w-[60%] pl-1">
+          The strength of the Farcaster developer communities depends upon education and community interaction. FarHack runs self-serve hackathon software and in-person hackathons in service of that community.
+        </p>
+      </div>
+      {/* <Hackathons /> */}
     </div>
   );
 }

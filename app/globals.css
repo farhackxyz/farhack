@@ -67,3 +67,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.fc-authkit-qrcode-dialog{
+  color: #27272a;
+}

@@ -31,8 +31,8 @@ export default async function HackathonBounties({ slug }: { slug: string }) {
     const bounties = hackathon.bounties as unknown as Bounty[];
 
     return (
-        <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pl-[7.5%] md:pl-[4.5%]">
+        <div className="">
+            <div className="text-white flex flex-col gap-1 items-start pl-[2.5%] ml-2 md:ml-0">
                 <HackathonNav hackathon={hackathon} />
                 {bounties ?
                 <>

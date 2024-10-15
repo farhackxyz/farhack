@@ -106,13 +106,19 @@ export default async function RootLayout({
                   <nav className="w-full bg-black/75 flex items-center justify-between p-4 pb-3 border-b border-white/20">
                     <div className="flex items-center gap-6">
                       <Link
-                        href="#"
+                        href="/"
                         className="flex items-center gap-2 text-lg font-semibold md:text-base"
                       >
                         <FarhackLogo width={35} height={35} />
                         <p className={`text-white text-2xl mr-4 ${karla.className}`}>FarHack</p>
                       </Link>
                       <Link
+                        href="https://warpcast.com/~/channel/farhack"
+                        className="text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        /farhack
+                      </Link>
+                      {/* <Link
                         href="#"
                         className="text-muted-foreground transition-colors hover:text-foreground"
                       >
@@ -123,7 +129,7 @@ export default async function RootLayout({
                         className="text-muted-foreground transition-colors hover:text-foreground"
                       >
                         Hackathons
-                      </Link>
+                      </Link> */}
                       {/* <Link
                         href="#"
                         className="rounded-full bg-[#3a3a3a] text-white/75 hover:text-white px-2 py-1"

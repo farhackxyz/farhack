@@ -30,8 +30,8 @@ export default async function HackathonTracks({ slug }: { slug: string }) {
     const tracks = hackathon.tracks as unknown as Track[];
 
     return (
-        <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pl-[7.5%] md:pl-[4.5%]">
+        <div>
+            <div className="text-white flex flex-col gap-1 items-start pl-[2.5%] ml-2 md:ml-0">
                 <HackathonNav hackathon={hackathon} />
                 {tracks ?
                 <>

@@ -44,9 +44,9 @@ function HackthonNavItem({ name, slug }: { name: string, slug: string }) {
 export default function HackathonNav({ hackathon }: { hackathon: any }) {
     return(
         <div>
-            <div className="text-white flex flex-col gap-1 items-start pt-5">
-                <p className="text-4xl mt-6">{hackathon.name ? hackathon.name : "Hackathon"}</p>
-                <div className="flex flex-row gap-2 md:gap-4 items-center mt-3.5 ml-2 md:ml-0 overflow-x-clip scrollbar-hide">
+            <div className="text-white flex flex-col gap-1 items-start">
+                <p className="text-4xl">{hackathon.name ? hackathon.name : "Hackathon"}</p>
+                <div className="flex flex-row gap-2 md:gap-4 items-center mt-3.5 overflow-x-clip scrollbar-hide">
                     {hackathonPages.map((page) => 
                         <HackthonNavItem key={page.slug} name={page.name} slug={page.slug} />
                     )}

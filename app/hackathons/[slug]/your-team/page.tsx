@@ -54,8 +54,8 @@ export default async function YourTeamPage() {
     }
 
     return (
-        <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pl-[4.5%] pr-[4.5%]">
+        <div className="">
+            <div className="text-white flex flex-col gap-1 items-start pl-[2.5%] pr-[4.5%]">
                 <HackathonNav hackathon={hackathon} />
                 <div className="mt-5 mb-3 flex flex-col items-start">
                     <p className="text-2xl font-semibold">Your Team</p>

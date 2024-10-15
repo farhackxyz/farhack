@@ -20,7 +20,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="text-white flex flex-col gap-1 items-start mt-[6%] sm:mt-[4%] md:mt-[2%] p-4">
+    <div className="text-white flex flex-col gap-1 items-start mt-[4%] sm:mt-[2%] md:mt-[1%] p-4 pt-0">
       <div className="pl-3">
         <span
           className="text-[10vw] md:text-[8vw] lg:text-[45px] leading-[12vw] md:leading-[8vw] lg:leading-[70px] text-left font-karla font-bold"
@@ -37,7 +37,9 @@ export default async function Home() {
           The strength of the Farcaster developer communities depends upon education and community interaction. FarHack runs self-serve hackathon software and in-person hackathons in service of that community.
         </p>
       </div>
-      {/* <Hackathons /> */}
+      <div className="ml-4">
+        <Hackathons />
+      </div>
     </div>
   );
 }

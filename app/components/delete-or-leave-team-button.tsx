@@ -6,24 +6,26 @@ import React, { useState } from 'react';
 export default function DeleteOrLeaveTeamButton({
     teamId,
     userId,
+    hackathonSlug,
     teamMembers,
     handleDeleteTeam,
     handleLeaveTeam
 }: {
     teamId: number,
     userId: number,
+    hackathonSlug: string,
     teamMembers: any[],
-    handleDeleteTeam: () => void,
-    handleLeaveTeam: () => void
+    handleDeleteTeam: (team_id: number, hackathon_slug: string) => Promise<void>,
+    handleLeaveTeam: (user_id: number, team_id: number, hackathon_slug: string) => Promise<void>
 }) {
     const [showModal, setShowModal] = useState(false);
     const [action, setAction] = useState<"delete" | "leave" | null>(null);
 
     const handleAction = () => {
         if (action === "delete") {
-            handleDeleteTeam();
+            handleDeleteTeam(teamId, hackathonSlug);
         } else if (action === "leave") {
-            handleLeaveTeam();
+            handleLeaveTeam(userId, teamId, hackathonSlug);
         }
         setShowModal(false);
     };

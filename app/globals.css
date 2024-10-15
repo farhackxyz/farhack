@@ -67,3 +67,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+.fc-authkit-qrcode-dialog{
+  color: #27272a;
+}
+
+.fc-authkit-signin-button button{
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 36px !important;
+  font-family: __Karla_f3a0e4, __Karla_Fallback_f3a0e4, sans-serif;
+}

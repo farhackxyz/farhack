@@ -38,8 +38,8 @@ export default async function HackathonTeams({ slug }: { slug: string }) {
     }
 
     return (
-        <div className="pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pl-[4.5%]">
+        <div className="">
+            <div className="text-white flex flex-col gap-1 items-start pl-[2.5%]">
                 <HackathonNav hackathon={hackathon} />
                 {teams ?
                 <>

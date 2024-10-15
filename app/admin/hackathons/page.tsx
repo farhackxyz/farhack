@@ -90,11 +90,11 @@ export default async function HackathonsPage() {
                     const adminHackathonIds = user?.admin_hackathons?.split(',').map(Number);
 
                     if (!Array.isArray(adminHackathonIds)) {
-                      console.log(`Invalid admin_hackathons: ${user?.admin_hackathons}`);
+                      console.error(`Invalid admin_hackathons: ${user?.admin_hackathons}`);
                       return false;
                     }
 
-                    console.log(`Checking hackathon ID ${hackathon.id} against admin IDs:`, adminHackathonIds);
+                    console.error(`Checking hackathon ID ${hackathon.id} against admin IDs:`, adminHackathonIds);
                     return adminHackathonIds.includes(hackathon.id);
                   })
                   .map(hackathon => (

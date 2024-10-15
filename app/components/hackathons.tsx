@@ -56,8 +56,9 @@ export default async function Hackathons() {
   if (hackathons) {
     hackathons.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
     return (
-      <div className="pt-7 md:pt-12">
-        <div className="flex flex-col md:flex-row md:flex-wrap justify-center md:justify-start items-center md:items-start gap-10">
+      <div className="pt-5 md:pt-8">
+        <p className="pb-4 text-2xl font-medium">Hackathons</p>
+        <div className="flex flex-col md:flex-row justify-center md:justify-start items-center md:items-start gap-10">
           {hackathons.map((hackathon) => (
             <HackathonListItem key={hackathon.id} hackathon={hackathon} />
           ))}
@@ -65,6 +66,5 @@ export default async function Hackathons() {
       </div>
     );
   }
-  // TODO: change all static loading so some sort of icon at least
   return <div>Loading...</div>;
 }

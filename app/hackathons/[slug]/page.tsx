@@ -24,8 +24,8 @@ export default async function HackathonBySlugPage() {
     const endDate = new Date(hackathon.end_date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 
     return (
-        <div className="pt-10 md:pt-5">
-            <div className="text-white flex flex-col gap-1 items-start pl-[7.5%] md:pl-[4.5%]">
+        <div className="pt-0">
+            <div className="text-white flex flex-col gap-1 items-start pl-[2.5%] ml-2 md:ml-0">
                 <HackathonNav hackathon={hackathon} />
                 <div className="flex flex-row flex-wrap md:flex-nowrap justify-between w-full mt-8 ml-1 mr-1">
                     <div className="flex flex-col md:w-1/2 gap-2">
